@@ -1,7 +1,13 @@
 /target
-/.idea
+/build
+/out
 atlassian-ide-plugin.xml
+
+#Idea
+/.idea
 *.iml
+*.ipr
+*.iws
 
 # OS generated files #
 ######################

@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@ComponentScan(basePackages="com.rafalkalita")
+@ComponentScan(basePackages="rafalkalita")
 @EnableWebMvc
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
 

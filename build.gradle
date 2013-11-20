@@ -1,0 +1,117 @@
+description = 'spitter'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:1.0'
+    }
+}
+
+allprojects {
+
+    apply plugin: 'idea'
+
+    group = 'com.rafalkalita.spitter'
+    version = '0.1.0.SNAPSHOT'
+
+    // default set of maven repositories to be used when resolving dependencies
+    repositories {
+        maven {
+            url "http://maven.springframework.org/release"
+            url "http://maven.springframework.org/milestone"
+            url "http://maven.springframework.org/snapshot"
+        }
+        mavenCentral()
+    }
+}
+
+configure(subprojects) {
+
+    apply plugin: 'java'
+    apply plugin: 'maven'
+
+    // set up dedicated directories for jars and source jars.
+    // this makes it easier when putting together the distribution
+    project.ext {
+        //libsBinDir = new File(libsDir, 'build')
+        //libsSrcDir = new File(libsDir, 'src')
+
+        // http://mvnrepository.com/artifact/commons-httpclient/commons-httpclient
+        //commonsHttpClientVersion = '3.1'
+        jacksonVersion = '1.9.13'
+        jodaVersion = '2.3'
+        junitVersion = '4.10'
+        mockitoVersion = '1.9.5'
+        //s2OAuthVersion = '1.0.0.M1'
+        //scribeVersion = '1.0.8'
+        servletVersion = '2.5'
+        springVersion = '3.2.4.RELEASE'
+    }
+
+    sourceSets {
+        test {
+            resources {
+                srcDirs = ['src/test/resources', 'src/test/java']
+            }
+        }
+    }
+
+    configurations {
+        provided { transitive = false }
+    }
+
+    sourceSets.main.compileClasspath += configurations.provided
+    sourceSets.test.compileClasspath += configurations.provided
+    sourceSets.test.runtimeClasspath += configurations.provided
+
+    dependencies {
+        compile 'log4j:log4j:1.2.17'
+        compile 'org.slf4j:slf4j-simple:1.6.6'
+        compile 'javax.inject:javax.inject:1'
+        testCompile "junit:junit:$junitVersion"
+        testCompile "org.mockito:mockito-all:$mockitoVersion"
+        testCompile "org.springframework:spring-test:$springVersion"
+    }
+
+    [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:all']
+}
+
+project('spitter-web') {
+
+    apply plugin: 'tomcat'
+    description = 'Spitter Web'
+
+    dependencies {
+
+        def tomcatVersion = '7.0.11'
+        tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+                "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
+        tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
+            exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
+        }
+
+        //Compile time but not included dependencies
+        providedCompile group: 'javax.servlet', name: 'servlet-api', version:'2.5'
+        providedCompile group: 'taglibs', name: 'standard', version: '1.1.2'
+
+        providedCompile 'org.apache.tomcat:jsp-api:6.0.37'
+        providedCompile 'org.apache.tomcat:jasper:6.0.37'
+
+        compile "org.springframework:spring-webmvc:$springVersion"
+
+        //compile "org.springframework.security:spring-security-core:3.0.3.RELEASE"
+        //compile "org.springframework.security:spring-security-web:3.0.3.RELEASE"
+        //compile "org.springframework.security:spring-security-config:3.0.3.RELEASE"
+        //compile "org.springframework.security:spring-security-taglibs:3.0.3.RELEASE"
+        //compile "org.springframework.security:spring-security-ldap:3.0.3.RELEASE"
+
+        //compile "org.hibernate:hibernate-validator:4.0.2.GA"
+
+        compile 'org.apache.tiles:tiles-core:2.2.2'
+        compile 'org.apache.tiles:tiles-jsp:2.2.2'
+        compile 'jstl:jstl:1.2'
+    }
+}

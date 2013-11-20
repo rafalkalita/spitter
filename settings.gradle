@@ -1,0 +1,4 @@
+rootProject.name = 'spitter'
+
+//include 'spitter-accessService'
+include 'spitter-web'
