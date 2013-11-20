@@ -79,12 +79,29 @@ configure(subprojects) {
     [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:all']
 }
 
+project('spitter-domain') {
+
+    description = 'Spitter Domain'
+    dependencies {}
+}
+
+project('spitter-service') {
+
+    description = 'Spitter Service'
+    dependencies {
+        compile project(':spitter-domain')
+    }
+}
+
 project('spitter-web') {
 
     apply plugin: 'tomcat'
     description = 'Spitter Web'
 
     dependencies {
+
+        compile project(':spitter-domain')
+        compile project(':spitter-service')
 
         def tomcatVersion = '7.0.11'
         tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",

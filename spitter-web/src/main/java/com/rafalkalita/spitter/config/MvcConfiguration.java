@@ -1,4 +1,4 @@
-package com.rafalkalita.config;
+package com.rafalkalita.spitter.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
