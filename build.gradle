@@ -90,6 +90,8 @@ project('spitter-service') {
     description = 'Spitter Service'
     dependencies {
         compile project(':spitter-domain')
+
+        compile "org.springframework:spring-webmvc:$springVersion"
     }
 }
 

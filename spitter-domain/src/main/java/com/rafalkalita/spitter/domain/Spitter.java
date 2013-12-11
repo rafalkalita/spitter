@@ -15,6 +15,14 @@ public class Spitter {
     private String fullName;
     private List<Spittle> spittles;
 
+    public Spitter(Long id, String username, String password, String fullName, List<Spittle> spittles) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.fullName = fullName;
+        this.spittles = spittles;
+    }
+
     public Long getId() {
         return id;
     }
