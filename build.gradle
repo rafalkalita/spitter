@@ -21,7 +21,11 @@ allprojects {
     repositories {
         maven {
             url "http://maven.springframework.org/release"
+        }
+        maven {
             url "http://maven.springframework.org/milestone"
+        }
+        maven {
             url "http://maven.springframework.org/snapshot"
         }
         mavenCentral()
@@ -132,5 +136,12 @@ project('spitter-web') {
         compile 'org.apache.tiles:tiles-core:2.2.2'
         compile 'org.apache.tiles:tiles-jsp:2.2.2'
         compile 'jstl:jstl:1.2'
+    }
+
+    test {
+        testLogging {
+            // Show that tests are run in the command-line output
+            events 'started', 'passed'
+        }
     }
 }
