@@ -138,6 +138,15 @@ project('spitter-web') {
         compile 'jstl:jstl:1.2'
     }
 
+    tomcatRun {
+        httpPort = 8080
+        httpsPort = 8091
+        enableSSL = true
+    }
+
+    [tomcatRun, tomcatStop]*.stopPort = 8081
+    [tomcatRun, tomcatStop]*.stopKey = 'stopKey'
+
     test {
         testLogging {
             // Show that tests are run in the command-line output
