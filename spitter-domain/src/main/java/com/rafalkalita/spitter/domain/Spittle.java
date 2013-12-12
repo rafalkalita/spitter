@@ -12,13 +12,13 @@ public class Spittle {
     private Long id;
     private Spitter spitter;
     private String message;
-    private Date whenCerated;
+    private Date whenCreated;
 
-    public Spittle(Long id, Spitter spitter, String message, Date whenCerated) {
+    public Spittle(Long id, Spitter spitter, String message, Date whenCreated) {
         this.id = id;
         this.spitter = spitter;
         this.message = message;
-        this.whenCerated = whenCerated;
+        this.whenCreated = whenCreated;
     }
 
     public Long getId() {
@@ -45,12 +45,12 @@ public class Spittle {
         this.message = message;
     }
 
-    public Date getWhenCerated() {
-        return whenCerated;
+    public Date getWhenCreated() {
+        return whenCreated;
     }
 
-    public void setWhenCerated(Date whenCerated) {
-        this.whenCerated = whenCerated;
+    public void setWhenCreated(Date whenCreated) {
+        this.whenCreated = whenCreated;
     }
 
     @Override
@@ -63,7 +63,7 @@ public class Spittle {
         if (!id.equals(spittle.id)) return false;
         if (message != null ? !message.equals(spittle.message) : spittle.message != null) return false;
         if (spitter != null ? !spitter.equals(spittle.spitter) : spittle.spitter != null) return false;
-        if (whenCerated != null ? !whenCerated.equals(spittle.whenCerated) : spittle.whenCerated != null) return false;
+        if (whenCreated != null ? !whenCreated.equals(spittle.whenCreated) : spittle.whenCreated != null) return false;
 
         return true;
     }
@@ -73,7 +73,7 @@ public class Spittle {
         int result = id.hashCode();
         result = 31 * result + (spitter != null ? spitter.hashCode() : 0);
         result = 31 * result + (message != null ? message.hashCode() : 0);
-        result = 31 * result + (whenCerated != null ? whenCerated.hashCode() : 0);
+        result = 31 * result + (whenCreated != null ? whenCreated.hashCode() : 0);
         return result;
     }
 
@@ -83,7 +83,7 @@ public class Spittle {
                 "id=" + id +
                 ", spitter=" + spitter +
                 ", message='" + message + '\'' +
-                ", whenCerated=" + whenCerated +
+                ", whenCerated=" + whenCreated +
                 '}';
     }
 }

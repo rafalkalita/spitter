@@ -43,11 +43,12 @@ public class HomeControllerTest {
         when(spitterService.getRecentSpittles(10)).thenReturn(twoSpittles());
 
         instance = new HomeController(spitterService);
-        instance.showHomeView(model);
+        String outcome = instance.showHomeView(model);
 
         verify(spitterService).getRecentSpittles(10);
 
         assertEquals(twoSpittles(), model.get("spittles"));
+        assertEquals("home", outcome);
 
     }
 

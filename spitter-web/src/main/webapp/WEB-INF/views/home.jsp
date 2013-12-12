@@ -11,7 +11,24 @@
         <title>Home</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <p>This is the homepage!</p>
+        <h1>A global community of people who are spitting out their thoughts!</h1>
+        <h3>Look at what these people are spitting right now...</h3>
+
+        <c:forEach var="spittle" items="${spittles}">
+
+            <s:url value="/spitters/{spitterName}" var="spitter_url" >
+                <s:param name="spitterName" value="${spittle.spitter.username}" />
+            </s:url>
+
+            <li>
+                <span class="spittleListText">
+                    <a href="${spitter_url}">
+                        <c:out value="${spittle.spitter.username}" />
+                    </a>
+                    <c:out value="${spittle.message}" /><br/>
+                    <small><fmt:formatDate value="${spittle.whenCreated}" pattern="hh:mma MMM d, yyyy" /></small>
+                </span>
+            </li>
+        </c:forEach>
     </body>
 </html>
