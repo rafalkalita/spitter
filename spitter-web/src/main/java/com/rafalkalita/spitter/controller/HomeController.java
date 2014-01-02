@@ -13,6 +13,8 @@ public class HomeController {
 
     private SpitterService spitterService;
 
+    private static final int DEFAULT_SPITTLES_PER_PAGE = 10;
+
     @Inject
     public HomeController(SpitterService spitterService) {
         this.spitterService = spitterService;
@@ -21,7 +23,7 @@ public class HomeController {
 	@RequestMapping(value={"/", "/home"}, method = RequestMethod.GET)
 	public String showHomeView(Map<String, Object> model) {
 
-        model.put("spittles", spitterService.getRecentSpittles(10));
+        model.put("spittles", spitterService.getRecentSpittles(DEFAULT_SPITTLES_PER_PAGE));
 
         return "home";
 	}
