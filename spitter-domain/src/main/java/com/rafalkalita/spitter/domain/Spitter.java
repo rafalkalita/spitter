@@ -1,5 +1,9 @@
 package com.rafalkalita.spitter.domain;
 
+import static org.apache.commons.lang.builder.EqualsBuilder.reflectionEquals;
+import static org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode;
+import static org.apache.commons.lang.builder.ToStringBuilder.reflectionToString;
+
 import java.util.List;
 
 /**
@@ -65,38 +69,16 @@ public class Spitter {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Spitter)) return false;
-
-        Spitter spitter = (Spitter) o;
-
-        if (fullName != null ? !fullName.equals(spitter.fullName) : spitter.fullName != null) return false;
-        if (!id.equals(spitter.id)) return false;
-        if (password != null ? !password.equals(spitter.password) : spitter.password != null) return false;
-        if (spittles != null ? !spittles.equals(spitter.spittles) : spitter.spittles != null) return false;
-        if (username != null ? !username.equals(spitter.username) : spitter.username != null) return false;
-
-        return true;
+        return reflectionEquals(this, o);
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (fullName != null ? fullName.hashCode() : 0);
-        result = 31 * result + (spittles != null ? spittles.hashCode() : 0);
-        return result;
+        return reflectionHashCode(this);
     }
 
     @Override
     public String toString() {
-        return "Spitter{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", spittles=" + spittles +
-                '}';
+        return reflectionToString(this);
     }
 }

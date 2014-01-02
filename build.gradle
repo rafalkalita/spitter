@@ -86,7 +86,9 @@ configure(subprojects) {
 project('spitter-domain') {
 
     description = 'Spitter Domain'
-    dependencies {}
+    dependencies {
+        compile "commons-lang:commons-lang:2.6"
+    }
 }
 
 project('spitter-service') {
