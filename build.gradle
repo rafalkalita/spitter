@@ -37,20 +37,12 @@ configure(subprojects) {
     apply plugin: 'java'
     apply plugin: 'maven'
 
-    // set up dedicated directories for jars and source jars.
-    // this makes it easier when putting together the distribution
     project.ext {
-        //libsBinDir = new File(libsDir, 'build')
-        //libsSrcDir = new File(libsDir, 'src')
 
-        // http://mvnrepository.com/artifact/commons-httpclient/commons-httpclient
-        //commonsHttpClientVersion = '3.1'
         jacksonVersion = '1.9.13'
         jodaVersion = '2.3'
         junitVersion = '4.10'
         mockitoVersion = '1.9.5'
-        //s2OAuthVersion = '1.0.0.M1'
-        //scribeVersion = '1.0.8'
         servletVersion = '2.5'
         springVersion = '3.2.4.RELEASE'
     }
@@ -126,14 +118,6 @@ project('spitter-web') {
         providedCompile 'org.apache.tomcat:jasper:6.0.37'
 
         compile "org.springframework:spring-webmvc:$springVersion"
-
-        //compile "org.springframework.security:spring-security-core:3.0.3.RELEASE"
-        //compile "org.springframework.security:spring-security-web:3.0.3.RELEASE"
-        //compile "org.springframework.security:spring-security-config:3.0.3.RELEASE"
-        //compile "org.springframework.security:spring-security-taglibs:3.0.3.RELEASE"
-        //compile "org.springframework.security:spring-security-ldap:3.0.3.RELEASE"
-
-        //compile "org.hibernate:hibernate-validator:4.0.2.GA"
 
         compile 'org.apache.tiles:tiles-core:2.2.2'
         compile 'org.apache.tiles:tiles-jsp:2.2.2'
