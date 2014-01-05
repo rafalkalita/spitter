@@ -2,5 +2,6 @@ rootProject.name = 'spitter'
 
 include 'spitter-service'
 include 'spitter-persistence'
+include 'spitter-persistence-hibernate'
 include 'spitter-domain'
 include 'spitter-web'

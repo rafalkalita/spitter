@@ -1,5 +1,8 @@
 package com.rafalkalita.spitter.domain;
 
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import static org.apache.commons.lang.builder.EqualsBuilder.reflectionEquals;
 import static org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode;
 import static org.apache.commons.lang.builder.ToStringBuilder.reflectionToString;
@@ -11,22 +14,21 @@ import java.util.List;
  * Date: 20/11/2013
  * Time: 18:34
  */
+@Entity
+@Table(name = "spitter")
+@XmlRootElement
 public class Spitter {
 
+    private static final long serialVersionUID = 1L;
+
     private Long id;
+
     private String username;
     private String password;
     private String fullName;
-    private List<Spittle> spittles;
 
-    public Spitter(Long id, String username, String password, String fullName, List<Spittle> spittles) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.fullName = fullName;
-        this.spittles = spittles;
-    }
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
     }
@@ -35,6 +37,7 @@ public class Spitter {
         this.id = id;
     }
 
+    @Column(name = "username")
     public String getUsername() {
         return username;
     }
@@ -43,6 +46,7 @@ public class Spitter {
         this.username = username;
     }
 
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -51,20 +55,13 @@ public class Spitter {
         this.password = password;
     }
 
+    @Column(name = "fullname")
     public String getFullName() {
         return fullName;
     }
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
-    }
-
-    public List<Spittle> getSpittles() {
-        return spittles;
-    }
-
-    public void setSpittles(List<Spittle> spittles) {
-        this.spittles = spittles;
     }
 
     @Override

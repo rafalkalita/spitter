@@ -1,5 +1,9 @@
 package com.rafalkalita.spitter.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 import static org.apache.commons.lang.builder.EqualsBuilder.reflectionEquals;
@@ -11,20 +15,21 @@ import static org.apache.commons.lang.builder.ToStringBuilder.reflectionToString
  * Date: 20/11/2013
  * Time: 18:31
  */
+@Entity
+@Table(name = "spittle")
 public class Spittle {
+
+    private static final long serialVersionUID = 1L;
 
     private Long id;
     private Spitter spitter;
     private String message;
+
+    @DateTimeFormat(pattern="hh:mma MMM d, YYYY")
     private Date whenCreated;
 
-    public Spittle(Long id, Spitter spitter, String message, Date whenCreated) {
-        this.id = id;
-        this.spitter = spitter;
-        this.message = message;
-        this.whenCreated = whenCreated;
-    }
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
     }
@@ -33,6 +38,8 @@ public class Spittle {
         this.id = id;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "spitter_id")
     public Spitter getSpitter() {
         return spitter;
     }
@@ -41,6 +48,8 @@ public class Spittle {
         this.spitter = spitter;
     }
 
+    @Column(name = "message")
+    @NotNull
     public String getMessage() {
         return message;
     }
@@ -49,6 +58,7 @@ public class Spittle {
         this.message = message;
     }
 
+    @Column(name = "whencreated")
     public Date getWhenCreated() {
         return whenCreated;
     }
