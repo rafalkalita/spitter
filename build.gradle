@@ -83,6 +83,14 @@ project('spitter-domain') {
     }
 }
 
+project('spitter-persistence') {
+
+    description = 'Spitter Persistence'
+    dependencies {
+        compile project(':spitter-domain')
+    }
+}
+
 project('spitter-service') {
 
     description = 'Spitter Service'
