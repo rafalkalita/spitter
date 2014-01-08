@@ -1,6 +1,7 @@
 package com.rafalkalita.spitter.persistence;
 
-import com.rafalkalita.spitter.domain.Spitter;
+import com.rafalkalita.spitter.model.Spitter;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.springframework.stereotype.Repository;
@@ -12,7 +13,7 @@ import javax.inject.Inject;
  * Date: 05/01/2014
  * Time: 22:21
  */
-@Repository
+@Repository(value = "spitterDAO")
 public class HibernateSpitterDAO implements SpitterDAO {
 
     @Inject
@@ -22,12 +23,10 @@ public class HibernateSpitterDAO implements SpitterDAO {
         return sessionFactory.getCurrentSession();
     }
 
-    @Override
     public void addSpitter(Spitter spitter) {
         currentSession().save(spitter);
     }
 
-    @Override
     public Spitter getSpitterById(long id) {
         return (Spitter) currentSession().get(Spitter.class, id);
     }

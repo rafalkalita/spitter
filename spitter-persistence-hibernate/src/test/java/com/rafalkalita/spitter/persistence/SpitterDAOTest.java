@@ -1,7 +1,9 @@
 package com.rafalkalita.spitter.persistence;
 
-import com.rafalkalita.spitter.domain.Spitter;
+import com.rafalkalita.spitter.model.Spitter;
+
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
@@ -28,9 +30,8 @@ import static org.springframework.test.jdbc.SimpleJdbcTestUtils.deleteFromTables
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-        "classpath:persistence-context.xml",
-        "classpath:dataSource-context.xml",
-        "classpath:transaction-context.xml"
+        "classpath:spring/config/beanLocations.xml",
+        "classpath:dataSource-test-context.xml"
 })
 
 @TransactionConfiguration(transactionManager = "txMgr", defaultRollback = true)

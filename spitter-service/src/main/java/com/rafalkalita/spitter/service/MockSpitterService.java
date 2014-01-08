@@ -1,7 +1,7 @@
 package com.rafalkalita.spitter.service;
 
-import com.rafalkalita.spitter.domain.Spitter;
-import com.rafalkalita.spitter.domain.Spittle;
+import com.rafalkalita.spitter.model.Spitter;
+import com.rafalkalita.spitter.model.Spittle;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -23,30 +23,50 @@ public class MockSpitterService implements SpitterService {
 
         Spitter spitterOne = mockedSpitterOne();
 
-        spittles.add(new Spittle(1L, spitterOne, "We have a decent weather today", new Date()));
-        spitterOne.setSpittles(spittles);
+        spittles.add(aSpittle(1L, spitterOne, "We have a decent weather today", new Date()));
 
-        spittles.add(new Spittle(2L, spitterOne, "What should I do in the next hour?", new Date()));
-        spitterOne.setSpittles(spittles);
+        spittles.add(aSpittle(2L, spitterOne, "What should I do in the next hour?", new Date()));
 
         Spitter spitterTwo = mockedSpitterTwo();
 
-        spittles.add(new Spittle(3L, spitterTwo, "I am going to be very productive today", new Date()));
-        spitterOne.setSpittles(spittles);
+        spittles.add(aSpittle(3L, spitterTwo, "I am going to be very productive today", new Date()));
 
-        spittles.add(new Spittle(4L, spitterTwo, "Or maybe I will spend some time on the couch", new Date()));
-        spitterOne.setSpittles(spittles);
+        spittles.add(aSpittle(4L, spitterTwo, "Or maybe I will spend some time on the couch", new Date()));
 
         return spittles;
     }
 
-    public Spitter mockedSpitterOne() {
+    private Spitter mockedSpitterOne() {
 
-        return new Spitter(1L, "Rafal", "1234", "Rafal Kalita", null);
+        return aSpitter(1L, "Rafal", "1234", "Rafal Kalita");
     }
 
-    public Spitter mockedSpitterTwo() {
+    private Spitter mockedSpitterTwo() {
 
-        return new Spitter(2L, "John", "1234", "John Snow", null);
+        return aSpitter(2L, "John", "1234", "John Snow");
+    }
+
+    private Spittle aSpittle(Long id, Spitter spitter, String message, Date date) {
+
+        Spittle spittle = new Spittle();
+
+        spittle.setId(id);
+        spittle.setSpitter(spitter);
+        spittle.setMessage(message);
+        spittle.setWhenCreated(date);
+
+        return spittle;
+    }
+
+    private Spitter aSpitter(Long id, String username, String password, String fullname) {
+
+        Spitter spitter = new Spitter();
+
+        spitter.setId(id);
+        spitter.setUsername(username);
+        spitter.setPassword(password);
+        spitter.setFullName(fullname);
+
+        return spitter;
     }
 }

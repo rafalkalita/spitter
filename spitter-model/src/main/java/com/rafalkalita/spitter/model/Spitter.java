@@ -1,13 +1,16 @@
-package com.rafalkalita.spitter.domain;
-
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
+package com.rafalkalita.spitter.model;
 
 import static org.apache.commons.lang.builder.EqualsBuilder.reflectionEquals;
 import static org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode;
 import static org.apache.commons.lang.builder.ToStringBuilder.reflectionToString;
 
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * User: rafalkalita
@@ -17,7 +20,7 @@ import java.util.List;
 @Entity
 @Table(name = "spitter")
 @XmlRootElement
-public class Spitter {
+public class Spitter implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
 

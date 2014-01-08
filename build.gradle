@@ -44,7 +44,8 @@ configure(subprojects) {
         junitVersion = '4.10'
         mockitoVersion = '1.9.5'
         servletVersion = '2.5'
-        springVersion = '3.2.4.RELEASE'
+        springVersion = '3.2.6.RELEASE'
+        hibernateVersion = '3.6.10.Final'
     }
 
     sourceSets {
@@ -75,14 +76,16 @@ configure(subprojects) {
     [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:all']
 }
 
-project('spitter-domain') {
+project('spitter-model') {
 
-    description = 'Spitter Domain'
+    description = 'Spitter Model'
     dependencies {
         compile "commons-lang:commons-lang:2.6"
         compile "javax.persistence:persistence-api:1.0"
         compile "javax.validation:validation-api:1.0.0.GA"
+        compile 'org.hibernate:hibernate-validator:5.0.2.Final'
         compile "org.codehaus.jackson:jackson-core-asl:1.6.3"
+
         compile "org.springframework:spring-context:$springVersion"
     }
 }
@@ -91,7 +94,7 @@ project('spitter-persistence') {
 
     description = 'Spitter Persistence'
     dependencies {
-        compile project(':spitter-domain')
+        compile project(':spitter-model')
     }
 }
 
@@ -99,14 +102,20 @@ project('spitter-persistence-hibernate') {
 
     description = 'Spitter Persistence - Hibernate implementation'
     dependencies {
-        compile project(':spitter-domain')
+        compile project(':spitter-model')
         compile project(':spitter-persistence')
+
+        compile "org.hibernate:hibernate-core:$hibernateVersion"
+        compile "org.hibernate:hibernate-entitymanager:$hibernateVersion"
+        compile 'org.hibernate:hibernate-annotations:3.5.6-Final'
+        compile 'org.hibernate:hibernate-commons-annotations:3.2.0.Final'
+
+
         compile "org.springframework:spring-jdbc:$springVersion"
         compile "org.springframework:spring-orm:$springVersion"
-        compile "org.hibernate:hibernate-core:3.3.2.GA"
-        compile "org.hibernate:hibernate-annotations:3.4.0.GA"
-        testCompile "com.h2database:h2:1.2.143"
-        testCompile "org.slf4j:slf4j-api:1.6.6"
+
+        compile 'mysql:mysql-connector-java:5.1.28'
+        //testCompile "com.h2database:h2:1.2.143"
     }
 }
 
@@ -114,7 +123,7 @@ project('spitter-service') {
 
     description = 'Spitter Service'
     dependencies {
-        compile project(':spitter-domain')
+        compile project(':spitter-model')
 
         compile "org.springframework:spring-webmvc:$springVersion"
     }
@@ -127,7 +136,7 @@ project('spitter-web') {
 
     dependencies {
 
-        compile project(':spitter-domain')
+        compile project(':spitter-model')
         compile project(':spitter-service')
 
         def tomcatVersion = '7.0.11'
@@ -165,5 +174,18 @@ project('spitter-web') {
             // Show that tests are run in the command-line output
             events 'started', 'passed'
         }
+    }
+
+    task createPom << {
+        pom {
+            project {
+                groupId 'org.rafalkalita'
+                artifactId 'spitter'
+                version '0.2.0'
+
+                inceptionYear '2013'
+
+            }
+        }.writeTo("pom.xml")
     }
 }

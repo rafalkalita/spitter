@@ -1,4 +1,4 @@
-package com.rafalkalita.spitter.domain;
+package com.rafalkalita.spitter.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,7 +17,7 @@ import static org.apache.commons.lang.builder.ToStringBuilder.reflectionToString
  */
 @Entity
 @Table(name = "spittle")
-public class Spittle {
+public class Spittle implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
 

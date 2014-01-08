@@ -1,11 +1,10 @@
 package com.rafalkalita.spitter.controller;
 
-import com.rafalkalita.spitter.domain.Spitter;
-import com.rafalkalita.spitter.domain.Spittle;
+import com.rafalkalita.spitter.model.Spitter;
+import com.rafalkalita.spitter.model.Spittle;
 import com.rafalkalita.spitter.service.SpitterService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 

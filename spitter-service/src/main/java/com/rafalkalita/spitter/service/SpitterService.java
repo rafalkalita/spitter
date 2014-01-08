@@ -1,6 +1,6 @@
 package com.rafalkalita.spitter.service;
 
-import com.rafalkalita.spitter.domain.Spittle;
+import com.rafalkalita.spitter.model.Spittle;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.rafalkalita.spitter.persistence;
 
-import com.rafalkalita.spitter.domain.Spitter;
+import com.rafalkalita.spitter.model.Spitter;
 
 /**
  * User: rafalkalita
