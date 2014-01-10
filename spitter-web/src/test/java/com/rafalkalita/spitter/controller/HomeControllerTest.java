@@ -55,9 +55,21 @@ public class HomeControllerTest {
 
         List<Spittle> spittles = new ArrayList<Spittle>();
 
-        spittles.add(new Spittle(1L, anySpitter, "It is a beautiful day", date));
-        spittles.add(new Spittle(2L, anySpitter, "It is a beautiful day", date));
+        spittles.add(aSpittle(1L, anySpitter, "It is a beautiful day", date));
+        spittles.add(aSpittle(2L, anySpitter, "It is a beautiful day", date));
 
         return spittles;
+    }
+
+    private Spittle aSpittle(Long id, Spitter spitter, String message, Date date) {
+
+        Spittle spittle = new Spittle();
+
+        spittle.setId(id);
+        spittle.setSpitter(spitter);
+        spittle.setMessage(message);
+        spittle.setWhenCreated(date);
+
+        return spittle;
     }
 }
