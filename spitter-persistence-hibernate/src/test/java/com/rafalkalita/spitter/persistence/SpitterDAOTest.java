@@ -30,8 +30,9 @@ import static org.springframework.test.jdbc.JdbcTestUtils.deleteFromTables;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-        "classpath:beanLocations.xml",
-        "classpath:dataSource-test-context.xml"
+        "classpath:dataSource-test-context.xml",
+        "classpath:spring/database/hibernate.xml",
+        "classpath:spring/transaction/transaction.xml"
 })
 
 @TransactionConfiguration(transactionManager = "txMgr", defaultRollback = true)
