@@ -1,6 +1,9 @@
 package com.rafalkalita.spitter.persistence;
 
 import com.rafalkalita.spitter.model.Spitter;
+import com.rafalkalita.spitter.model.Spittle;
+
+import java.util.List;
 
 /**
  * User: rafalkalita
@@ -11,5 +14,11 @@ public interface SpitterDAO {
 
     void addSpitter(Spitter spitter);
 
+    void saveSpitter(Spitter spitter);
+
     Spitter getSpitterById(long id);
+
+    List<Spittle> getRecentSpittles(int count);
+
+    void saveSpittle(Spittle spittle);
 }

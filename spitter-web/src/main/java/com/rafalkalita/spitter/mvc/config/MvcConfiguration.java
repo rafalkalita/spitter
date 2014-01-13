@@ -1,4 +1,4 @@
-package com.rafalkalita.spitter.config;
+package com.rafalkalita.spitter.mvc.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@ComponentScan(basePackages="com.rafalkalita")
+@ComponentScan(basePackages="com.rafalkalita.spitter.mvc")
 @EnableWebMvc
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
 

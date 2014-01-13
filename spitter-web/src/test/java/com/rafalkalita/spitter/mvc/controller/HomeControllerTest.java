@@ -1,10 +1,11 @@
-package com.rafalkalita.spitter.controller;
+package com.rafalkalita.spitter.mvc.controller;
 
 import com.rafalkalita.spitter.model.Spitter;
 import com.rafalkalita.spitter.model.Spittle;
 import com.rafalkalita.spitter.service.SpitterService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -22,7 +23,8 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class HomeControllerTest {
 
-    private HomeController instance;
+    @InjectMocks
+    private HomeController instance = new HomeController();
 
     @Mock
     private SpitterService spitterService;
@@ -41,7 +43,6 @@ public class HomeControllerTest {
 
         when(spitterService.getRecentSpittles(10)).thenReturn(twoSpittles());
 
-        instance = new HomeController(spitterService);
         String outcome = instance.showHomeView(model);
 
         verify(spitterService).getRecentSpittles(10);

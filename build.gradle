@@ -10,9 +10,9 @@ buildscript {
     }
 }
 
-allprojects {
+apply plugin: 'idea'
 
-    apply plugin: 'idea'
+allprojects {
 
     group = 'com.rafalkalita.spitter'
     version = '0.1.0.SNAPSHOT'
@@ -124,6 +124,8 @@ project('spitter-service') {
     description = 'Spitter Service'
     dependencies {
         compile project(':spitter-model')
+        compile project(':spitter-persistence')
+        compile project(':spitter-persistence-hibernate')
 
         compile "org.springframework:spring-webmvc:$springVersion"
     }

@@ -1,4 +1,4 @@
-package com.rafalkalita.spitter.controller;
+package com.rafalkalita.spitter.mvc.controller;
 
 import com.rafalkalita.spitter.service.SpitterService;
 import org.springframework.stereotype.Controller;
@@ -11,14 +11,12 @@ import java.util.Map;
 @Controller
 public class HomeController {
 
+    @Inject
     private SpitterService spitterService;
 
     private static final int DEFAULT_SPITTLES_PER_PAGE = 10;
 
-    @Inject
-    public HomeController(SpitterService spitterService) {
-        this.spitterService = spitterService;
-    }
+    public HomeController()  { }
 
 	@RequestMapping(value={"/", "/home"}, method = RequestMethod.GET)
 	public String showHomeView(Map<String, Object> model) {

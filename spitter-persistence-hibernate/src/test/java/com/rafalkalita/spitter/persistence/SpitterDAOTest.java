@@ -30,7 +30,7 @@ import static org.springframework.test.jdbc.JdbcTestUtils.deleteFromTables;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-        "classpath:spring/config/beanLocations.xml",
+        "classpath:beanLocations.xml",
         "classpath:dataSource-test-context.xml"
 })
 
