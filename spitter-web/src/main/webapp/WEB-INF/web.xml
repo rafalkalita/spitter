@@ -15,6 +15,7 @@
             classpath:spring/database/hibernate.xml
             classpath:spring/transaction/transaction.xml
             classpath:service-context.xml
+            classpath:spring/database/cleanAndInsertData.xml
         </param-value>
     </context-param>
 
