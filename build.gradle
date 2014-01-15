@@ -191,3 +191,12 @@ project('spitter-web') {
         }.writeTo("pom.xml")
     }
 }
+
+project('spitter-specification') {
+
+    description = 'Spitter Specification'
+
+    dependencies {
+        testCompile 'org.jbehave:jbehave-core:3.9'
+    }
+}
