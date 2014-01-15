@@ -120,9 +120,9 @@ project('spitter-persistence-hibernate') {
         compile "org.springframework:spring-jdbc:$springVersion"
         compile "org.springframework:spring-orm:$springVersion"
 
-        compile 'mysql:mysql-connector-java:5.1.28'
+        //compile 'mysql:mysql-connector-java:5.1.28'
 
-        testCompile 'org.hsqldb:hsqldb:2.3.1'
+        compile 'org.hsqldb:hsqldb:2.3.1'
     }
 }
 

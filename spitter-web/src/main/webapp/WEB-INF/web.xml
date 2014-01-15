@@ -8,14 +8,15 @@
 
     <display-name>spitter</display-name>
 
+    <!--classpath:spring/database/dataSourceMySQL.xml-->
+    <!--classpath:spring/database/cleanAndInsertData.xml-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath:spring/database/dataSource.xml
+            classpath:spring/database/dataSourceHSQL.xml
             classpath:spring/database/hibernate.xml
             classpath:spring/transaction/transaction.xml
             classpath:service-context.xml
-            classpath:spring/database/cleanAndInsertData.xml
         </param-value>
     </context-param>
 
