@@ -18,7 +18,6 @@ Then I see 6 spittles on the home page
 Scenario: home page displays 25 spittles if defaultSpittlesPerPage property is not defined
 Given Jack is a user with an account
 And user Jack posted 30 spittles
-And defaultSpittlesPerPage is not defined
 When I navigate to the home page
 Then I see 25 spittles on the home page
 
