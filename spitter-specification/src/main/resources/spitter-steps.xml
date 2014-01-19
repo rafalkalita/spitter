@@ -23,7 +23,7 @@
         <constructor-arg ref="driverProvider"/>
     </bean>
 
-    <bean id="etsySteps" class="com.rafalkalita.spitter.specification.steps.SpitterSteps">
+    <bean id="spitterSteps" class="com.rafalkalita.spitter.specification.steps.SpitterSteps">
         <constructor-arg ref="pageFactory"/>
     </bean>
 

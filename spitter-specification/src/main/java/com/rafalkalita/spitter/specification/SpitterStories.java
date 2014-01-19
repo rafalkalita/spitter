@@ -26,6 +26,7 @@ import static org.jbehave.web.selenium.WebDriverHtmlOutput.WEB_DRIVER_HTML;
 public class SpitterStories extends JUnitStories {
 
     PendingStepStrategy pendingStepStrategy = new FailingUponPendingStep();
+
     CrossReference crossReference = new CrossReference()
             .withJsonOnly()
             .withPendingStepStrategy(pendingStepStrategy)
@@ -33,8 +34,11 @@ public class SpitterStories extends JUnitStories {
             .excludingStoriesWithNoExecutedScenarios(true);
 
     ContextView contextView = new LocalFrameContextView().sized(640, 120);
+
     SeleniumContext seleniumContext = new SeleniumContext();
+
     SeleniumStepMonitor stepMonitor = new SeleniumStepMonitor(contextView, seleniumContext, crossReference.getStepMonitor());
+
     Format[] formats = new Format[] { new SeleniumContextOutput(seleniumContext), CONSOLE, WEB_DRIVER_HTML };
     StoryReporterBuilder reporterBuilder = new StoryReporterBuilder()
             .withCodeLocation(codeLocationFromClass(SpitterStories.class)).withFailureTrace(true)
@@ -43,7 +47,9 @@ public class SpitterStories extends JUnitStories {
 
     @Override
     public Configuration configuration() {
-        return new SeleniumConfiguration().useSeleniumContext(seleniumContext)
+
+        return new SeleniumConfiguration()
+                .useSeleniumContext(seleniumContext)
                 .usePendingStepStrategy(pendingStepStrategy)
                 .useStoryControls(new StoryControls().doResetStateBeforeScenario(false)).useStepMonitor(stepMonitor)
                 .useStoryLoader(new LoadFromClasspath(SpitterStories.class))
@@ -52,6 +58,7 @@ public class SpitterStories extends JUnitStories {
 
     @Override
     public InjectableStepsFactory stepsFactory() {
+
         ApplicationContext context = new SpringApplicationContextFactory("spitter-steps.xml").createApplicationContext();
         return new SpringStepsFactory(configuration(), context);
     }
