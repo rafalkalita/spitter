@@ -197,6 +197,7 @@ project('spitter-specification') {
     description = 'Spitter Specification'
 
     dependencies {
+        compile project(':spitter-service')
 
         compile 'org.jbehave:jbehave-core:3.9'
 
@@ -214,13 +215,13 @@ project('spitter-specification') {
         main {
             resources {
                 srcDir 'src/main/resources'
-                srcDir 'src/main/stories'
+                srcDir 'src/main/resources/stories'
             }
         }
         test {
             resources {
                 srcDir 'src/main/resources'
-                srcDir 'src/main/stories'
+                srcDir 'src/main/resources/stories'
             }
         }
     }

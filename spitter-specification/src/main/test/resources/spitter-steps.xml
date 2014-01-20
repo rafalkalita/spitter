@@ -4,8 +4,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-    <bean id="driverProvider" class="org.jbehave.web.selenium.FirefoxWebDriverProvider" >
-    </bean>
+    <bean id="driverProvider" class="org.jbehave.web.selenium.FirefoxWebDriverProvider" />
+
+    <bean id="spitterService" class="com.rafalkalita.spitter.service.SpitterServiceImpl" />
 
     <bean id="webDriverProvider" class="org.jbehave.web.selenium.PerStoryWebDriverSteps">
         <constructor-arg ref="driverProvider"/>
@@ -21,6 +22,7 @@
 
     <bean id="pageFactory" class="com.rafalkalita.spitter.specification.pages.PageFactory">
         <constructor-arg ref="driverProvider"/>
+        <constructor-arg ref="spitterService"/>
     </bean>
 
     <bean id="spitterSteps" class="com.rafalkalita.spitter.specification.steps.SpitterSteps">
