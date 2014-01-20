@@ -3,15 +3,17 @@ package com.rafalkalita.spitter.specification.steps;
 import org.jbehave.core.annotations.AfterStories;
 import org.jbehave.web.selenium.FirefoxWebDriverProvider;
 import org.jbehave.web.selenium.WebDriverProvider;
+import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
+
+@Component
 public class JournaledStoriesSteps {
 
     private static final String JOURNAL_FIREFOX_COMMANDS = System.getProperty("JOURNAL_FIREFOX_COMMANDS", "false");
-    private final WebDriverProvider webDriverProvider;
 
-    public JournaledStoriesSteps(WebDriverProvider webDriverProvider) {
-        this.webDriverProvider = webDriverProvider;
-    }
+    @Inject
+    private WebDriverProvider webDriverProvider;
 
     @AfterStories
     public void afterStories() throws Exception {

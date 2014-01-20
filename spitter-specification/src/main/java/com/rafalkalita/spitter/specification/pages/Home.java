@@ -67,6 +67,7 @@ public class Home extends FluentWebDriverPage {
         Spitter spitter = new Spitter();
         spitter.setFullName(username);
         spitter.setUsername(username);
+        spitter.setPassword("");
 
         return spitter;
     }

@@ -5,7 +5,9 @@ import com.rafalkalita.spitter.specification.pages.PageFactory;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
@@ -16,10 +18,12 @@ import static org.junit.Assert.assertTrue;
  * Date: 15/01/2014
  * Time: 22:49
  */
+@Component
 public class SpitterSteps {
 
     private Home home;
 
+    @Inject
     public SpitterSteps(PageFactory pageFactory) {
         this.home = pageFactory.newHome();
     }

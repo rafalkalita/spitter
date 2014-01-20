@@ -51,6 +51,7 @@ public class SpitterServiceImpl implements SpitterService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Spitter getSpitterByUsername(String username) {
         return spitterDao.getSpitterByUsername(username);
     }
