@@ -3,7 +3,6 @@ package com.rafalkalita.spitter.persistence;
 import com.rafalkalita.spitter.model.Spitter;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -69,6 +68,16 @@ public class SpitterDAOTest {
         Spitter spitterIn = insertASpitter("username", "password", "fullname");
 
         Spitter spitterOut = dao.getSpitterById(spitterIn.getId());
+
+        assertEquals(spitterIn, spitterOut);
+    }
+
+    @Test
+    public void shouldBeAbleToFindInsertedSpitterByName() {
+
+        Spitter spitterIn = insertASpitter("username", "password", "fullname");
+
+        Spitter spitterOut = dao.getSpitterByUsername(spitterIn.getUsername());
 
         assertEquals(spitterIn, spitterOut);
     }

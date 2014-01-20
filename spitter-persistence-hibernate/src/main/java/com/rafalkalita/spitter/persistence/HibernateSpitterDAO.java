@@ -3,8 +3,10 @@ package com.rafalkalita.spitter.persistence;
 import com.rafalkalita.spitter.model.Spitter;
 
 import com.rafalkalita.spitter.model.Spittle;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.hibernate.criterion.Expression;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
@@ -49,5 +51,19 @@ public class HibernateSpitterDAO implements SpitterDAO {
     @Override
     public void saveSpittle(Spittle spittle) {
         currentSession().save(spittle);
+    }
+
+    @Override
+    public Spitter getSpitterByUsername(String username) {
+
+        Criteria crit = currentSession().createCriteria(Spitter.class);
+        crit.add( Expression.eq("username", username) );
+        crit.setMaxResults(1);
+        List spitters = crit.list();
+
+        if(spitters.size() > 0) {
+            return (Spitter)spitters.get(0);
+        }
+        return null;
     }
 }

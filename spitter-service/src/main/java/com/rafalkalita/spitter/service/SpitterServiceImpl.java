@@ -49,4 +49,9 @@ public class SpitterServiceImpl implements SpitterService {
             spitterDao.saveSpitter(spitter);
         }
     }
+
+    @Override
+    public Spitter getSpitterByUsername(String username) {
+        return spitterDao.getSpitterByUsername(username);
+    }
 }

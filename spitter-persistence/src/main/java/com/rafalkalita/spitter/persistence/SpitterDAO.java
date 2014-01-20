@@ -21,4 +21,6 @@ public interface SpitterDAO {
     List<Spittle> getRecentSpittles(int count);
 
     void saveSpittle(Spittle spittle);
+
+    Spitter getSpitterByUsername(String username);
 }
