@@ -39,6 +39,8 @@ configure(subprojects) {
 
     project.ext {
 
+        sourceCompatibility = JavaVersion.VERSION_1_7
+
         jacksonVersion = '1.9.13'
         jodaVersion = '2.3'
         junitVersion = '4.10'
@@ -50,8 +52,11 @@ configure(subprojects) {
 
     sourceSets {
         test {
+            java {
+                srcDir 'src/test/java'
+            }
             resources {
-                srcDirs = ['src/test/resources', 'src/test/java']
+                srcDirs = ['src/test/resources']
             }
         }
     }
@@ -209,20 +214,5 @@ project('spitter-specification') {
 
         compile 'org.seleniumhq.selenium:selenium-java:2.35.0'
         compile 'org.seleniumhq.selenium.fluent:fluent-selenium:1.14.2'
-    }
-
-    sourceSets {
-        main {
-            resources {
-                srcDir 'src/main/resources'
-                srcDir 'src/main/resources/stories'
-            }
-        }
-        test {
-            resources {
-                srcDir 'src/main/resources'
-                srcDir 'src/main/resources/stories'
-            }
-        }
     }
 }

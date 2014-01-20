@@ -3,7 +3,6 @@ package com.rafalkalita.spitter.service;
 import com.rafalkalita.spitter.model.Spitter;
 import com.rafalkalita.spitter.model.Spittle;
 
-import java.util.Date;
 import java.util.List;
 
 /**

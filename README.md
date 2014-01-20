@@ -5,7 +5,7 @@ Summary
 -------
 A Twitter-like application called Spitter.
 Based on Spring in Action, Third Edition by Craig Walls.
-Using Spring 3.2, Hibernate 3.6 and JBehave.
+Using Gradle, Spring 3.2, Hibernate 3.6 and JBehave.
 
 
 To run on embedded server
