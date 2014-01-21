@@ -17,19 +17,21 @@
 
         <c:forEach var="spittle" items="${spittles}">
 
-            <s:url value="/spitters/{spitterName}" var="spitter_url" >
-                <s:param name="spitterName" value="${spittle.spitter.username}" />
-            </s:url>
+            <div class="spittle">
+                <s:url value="/spitters/{spitterName}" var="spitter_url" >
+                    <s:param name="spitterName" value="${spittle.spitter.username}" />
+                </s:url>
 
-            <li>
-                <span class="spittleListText">
-                    <a href="${spitter_url}">
-                        <c:out value="${spittle.spitter.username}" />
-                    </a>
-                    <c:out value="${spittle.message}" /><br/>
-                    <small><fmt:formatDate value="${spittle.whenCreated}" pattern="hh:mma MMM d, yyyy" /></small>
-                </span>
-            </li>
+                <li>
+                    <span class="spittleListText">
+                        <a href="${spitter_url}">
+                            <c:out value="${spittle.spitter.username}" />
+                        </a>
+                        <c:out value="${spittle.message}" /><br/>
+                        <small><fmt:formatDate value="${spittle.whenCreated}" pattern="hh:mma MMM d, yyyy" /></small>
+                    </span>
+                </li>
+            </div>
         </c:forEach>
     </body>
 </html>

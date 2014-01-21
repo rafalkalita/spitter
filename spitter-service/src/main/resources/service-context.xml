@@ -9,7 +9,7 @@
                            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- contexts for dependencies -->
-    <import resource="classpath:spring/database/dataSourceHSQL.xml"/>
+    <import resource="classpath:spring/database/dataSourceMySQL.xml"/>
     <import resource="classpath:spring/database/hibernate.xml"/>
     <import resource="classpath:spring/transaction/transaction.xml"/>
 

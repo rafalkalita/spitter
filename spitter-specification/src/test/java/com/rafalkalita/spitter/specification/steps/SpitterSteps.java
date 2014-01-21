@@ -2,9 +2,11 @@ package com.rafalkalita.spitter.specification.steps;
 
 import com.rafalkalita.spitter.specification.pages.Home;
 import com.rafalkalita.spitter.specification.pages.PageFactory;
+import org.jbehave.core.annotations.BeforeScenario;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
@@ -12,6 +14,7 @@ import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.springframework.test.jdbc.JdbcTestUtils.deleteFromTables;
 
 /**
  * User: rafalkalita
@@ -22,6 +25,16 @@ import static org.junit.Assert.assertTrue;
 public class SpitterSteps {
 
     private Home home;
+
+    @Inject
+    JdbcTemplate jdbcTemplate;
+
+    @BeforeScenario
+    public void setUp() {
+
+        deleteFromTables(jdbcTemplate, "spittle");
+        deleteFromTables(jdbcTemplate, "spitter");
+    }
 
     @Inject
     public SpitterSteps(PageFactory pageFactory) {

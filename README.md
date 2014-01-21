@@ -13,6 +13,14 @@ To run on embedded server
 
 gradle clean tomcatRun
 
+If you would like to test on the HSQL change in service-context.xml
+
+<import resource="classpath:spring/database/dataSourceMySQL.xml"/>
+
+to:
+
+<import resource="classpath:spring/database/dataSourceHSQL.xml"/>
+
 
 To test
 -------
@@ -23,9 +31,11 @@ gradle test
 To test the specification.
 --------------------------
 
-1. First run embedded server
+1. Run MySQL database server (you cannot test the embedded database with an embedded server - because of two different database instances).
+2. Run embedded server
   gradle tomcatRun
-2. In intelliJ right click on the AnnotatedSpitterStoriesTest class and Run 'AnnotatedSpitterStoriesTest'.
-Make sure your src/main/test directory is marked as 'Test Sources Root'.
+3. In spitter-specification project:
+a.) mvn test
+b.) In intelliJ right click on the AnnotatedSpitterStoriesTest class and Run 'AnnotatedSpitterStoriesTest'.
 
 TODO: use gradle to run the stories

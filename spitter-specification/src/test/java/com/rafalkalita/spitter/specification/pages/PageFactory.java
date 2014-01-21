@@ -1,7 +1,7 @@
 package com.rafalkalita.spitter.specification.pages;
 
-import com.rafalkalita.spitter.service.SpitterService;
 import org.jbehave.web.selenium.WebDriverProvider;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
@@ -15,13 +15,12 @@ import javax.inject.Inject;
 public class PageFactory {
 
     @Inject
-    private SpitterService spitterService;
-
-    @Inject
     private WebDriverProvider webDriverProvider;
 
+    @Inject
+    private JdbcTemplate jdbcTemplate;
 
     public Home newHome() {
-        return new Home(webDriverProvider, spitterService);
+        return new Home(webDriverProvider, jdbcTemplate);
     }
 }
