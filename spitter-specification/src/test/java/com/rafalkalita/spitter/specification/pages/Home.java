@@ -43,7 +43,7 @@ public class Home extends FluentWebDriverPage {
 
             int row = jdbcTemplate.update(sql, params, types);
 
-            logger.info(row + " rows inserted.");
+            logger.debug(row + " rows inserted.");
         }
         Long userId = getUserId(username);
     }
@@ -62,8 +62,7 @@ public class Home extends FluentWebDriverPage {
 
         int row = jdbcTemplate.update(sql, params, types);
 
-        logger.info(row + "rows inserted");
-        logger.info(row + " spittle posted(" + message + ") ");
+        logger.debug(row + " spittle posted(" + message + ") ");
     }
 
     public void setDefaultSpittlesPerPage(int number) {
@@ -71,11 +70,11 @@ public class Home extends FluentWebDriverPage {
     }
 
     public int numberOfSpittles() {
-        return divs(By.className("spittle")).size();
+        return divs(By.xpath("//div[@class='spittle']")).size();
     }
 
-    public int numberOfSpittlesForAUser(String user) {
-        return 0; // TODO: finish
+    public int numberOfSpittlesForAUser(String username) {
+        return divs(By.xpath("//div[@class='spittle']//a[*/text()='" + username + "']")).size();
     }
 
     public boolean allSpittlesAreOrderedDescending() {

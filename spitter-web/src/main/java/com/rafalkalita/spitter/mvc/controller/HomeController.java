@@ -14,7 +14,7 @@ public class HomeController {
     @Inject
     private SpitterService spitterService;
 
-    private static final int DEFAULT_SPITTLES_PER_PAGE = 10;
+    private static final int DEFAULT_SPITTLES_PER_PAGE = 25;
 
     public HomeController()  { }
 
