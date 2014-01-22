@@ -44,7 +44,10 @@ public class HibernateSpitterDAO implements SpitterDAO {
     @Override
     @SuppressWarnings("unchecked")
     public List<Spittle> getRecentSpittles(int count) {
-        return currentSession().createCriteria(Spittle.class).list();
+
+        List<Spittle> spittles = currentSession().createCriteria(Spittle.class).list();
+
+        return spittles.subList(0, count > spittles.size() ? spittles.size() : count);
     }
 
     @Override

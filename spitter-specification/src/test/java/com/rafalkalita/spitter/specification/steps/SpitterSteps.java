@@ -2,10 +2,10 @@ package com.rafalkalita.spitter.specification.steps;
 
 import com.rafalkalita.spitter.specification.pages.Home;
 import com.rafalkalita.spitter.specification.pages.PageFactory;
-import org.jbehave.core.annotations.BeforeScenario;
-import org.jbehave.core.annotations.Given;
-import org.jbehave.core.annotations.Then;
-import org.jbehave.core.annotations.When;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jbehave.core.annotations.*;
+import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +24,8 @@ import static org.springframework.test.jdbc.JdbcTestUtils.deleteFromTables;
 @Component
 public class SpitterSteps {
 
+    private static final Log logger = LogFactory.getLog(SpitterSteps.class);
+
     private Home home;
 
     @Inject
@@ -31,9 +33,15 @@ public class SpitterSteps {
 
     @BeforeScenario
     public void setUp() {
+        try {
+            deleteFromTables(jdbcTemplate, "spittle");
+            deleteFromTables(jdbcTemplate, "spitter");
+        } catch(CannotGetJdbcConnectionException e) {
+            logger.error("Cannot connect to the database.\n" + e.getMessage());
+        } catch (Exception e){
+            logger.error(e.getMessage());
+        }
 
-        deleteFromTables(jdbcTemplate, "spittle");
-        deleteFromTables(jdbcTemplate, "spitter");
     }
 
     @Inject
@@ -42,7 +50,9 @@ public class SpitterSteps {
     }
 
     @Given("$user is a user with an account")
+    @Alias("And $user is a user with an account") // used in parameterised scenarios
     public void userHasAnAccount(String user) {
+        logger.info("creating a user: " + user);
         home.createAUser(user);
     }
 
@@ -51,11 +61,6 @@ public class SpitterSteps {
         for(int i=0; i< numberOfSpittles;i++) {
             home.postASpittle(user, "message" + i);
         }
-    }
-
-    @Given("defaultSpittlesPerPage is $number")
-    public void defaultSpittlesPerPageIs(int number) {
-        home.setDefaultSpittlesPerPage(number);
     }
 
     @Given("user $user posted a spittle on '$date'")

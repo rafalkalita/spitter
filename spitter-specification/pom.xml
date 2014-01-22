@@ -12,8 +12,9 @@
         <jbehave.core.version>4.0-beta-3</jbehave.core.version>
         <jbehave.web.version>3.6-beta-1</jbehave.web.version>
         <jbehave.site.version>3.1.1</jbehave.site.version>
-        <fluent.selenium.version>1.14.2</fluent.selenium.version>
-        <selenium.version>2.35.0</selenium.version>
+        <fluent.selenium.version>1.14.5</fluent.selenium.version>
+        <selenium.version>2.37.1</selenium.version>
+        <selenium-api>2.37.1</selenium-api>
         <spring-test>3.2.6.RELEASE</spring-test>
         <spring-jdbc>3.2.6.RELEASE</spring-jdbc>
         <mysql-connector>5.1.28</mysql-connector>
@@ -86,6 +87,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <version>${selenium-api}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>${spring-jdbc}</version>
@@ -115,7 +122,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit-dep</artifactId>
-            <version>4.8.2</version>
+            <version>4.11</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.hamcrest</groupId>

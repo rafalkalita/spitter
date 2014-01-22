@@ -29,6 +29,9 @@ public class HomeControllerTest {
     @Mock
     private SpitterService spitterService;
 
+    @Mock
+    private Properties spitterProperties;
+
     private Map<String, Object> model = new HashMap<String, Object>();
 
     @Mock
@@ -41,11 +44,11 @@ public class HomeControllerTest {
 
         date = new Date();
 
-        when(spitterService.getRecentSpittles(25)).thenReturn(twoSpittles());
-
+        when(spitterService.getRecentSpittles(10)).thenReturn(twoSpittles());
+        when(spitterProperties.getProperty("defaultSpittlesPerPage")).thenReturn("10");
         String outcome = instance.showHomeView(model);
 
-        verify(spitterService).getRecentSpittles(25);
+        verify(spitterService).getRecentSpittles(10);
 
         assertEquals(twoSpittles(), model.get("spittles"));
         assertEquals("home", outcome);

@@ -1,5 +1,6 @@
 package com.rafalkalita.spitter.specification.pages;
 
+import com.rafalkalita.spitter.specification.exceptions.URLNotLoadingException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jbehave.web.selenium.FluentWebDriverPage;
@@ -7,8 +8,10 @@ import org.jbehave.web.selenium.WebDriverProvider;
 import org.openqa.selenium.By;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import javax.annotation.Resource;
 import java.sql.Types;
 import java.util.Date;
+import java.util.Properties;
 
 import static org.springframework.test.jdbc.JdbcTestUtils.countRowsInTableWhere;
 
@@ -21,6 +24,9 @@ public class Home extends FluentWebDriverPage {
 
     private static final Log logger = LogFactory.getLog(Home.class);
 
+    @Resource(name = "spitterProperties")
+    private Properties spitterProperties;
+
     private JdbcTemplate jdbcTemplate;
 
     public Home(WebDriverProvider webDriverProvider, JdbcTemplate jdbcTemplate) {
@@ -29,7 +35,10 @@ public class Home extends FluentWebDriverPage {
     }
 
     public void go() {
-        get("http://localhost:8080/spitter-web/");
+        String url = "http://localhost:8080/spitter-web/";
+
+        get(url);
+        checkPageIsLoaded(url);
     }
 
     public void createAUser(String username) {
@@ -45,7 +54,6 @@ public class Home extends FluentWebDriverPage {
 
             logger.debug(row + " rows inserted.");
         }
-        Long userId = getUserId(username);
     }
 
     public void postASpittle(String username, String message) {
@@ -65,16 +73,12 @@ public class Home extends FluentWebDriverPage {
         logger.debug(row + " spittle posted(" + message + ") ");
     }
 
-    public void setDefaultSpittlesPerPage(int number) {
-        // TODO: finish
-    }
-
     public int numberOfSpittles() {
         return divs(By.xpath("//div[@class='spittle']")).size();
     }
 
     public int numberOfSpittlesForAUser(String username) {
-        return divs(By.xpath("//div[@class='spittle']//a[*/text()='" + username + "']")).size();
+        return divs(By.xpath("@name='"+username+"'")).size();
     }
 
     public boolean allSpittlesAreOrderedDescending() {
@@ -89,5 +93,12 @@ public class Home extends FluentWebDriverPage {
 
         String sql = "SELECT id FROM spitter WHERE username='" + username + "'";
         return jdbcTemplate.queryForObject(sql, Long.class);
+    }
+
+    private void checkPageIsLoaded(String url) {
+        if(divs(By.xpath("//body[@id='spitter']")).size() == 0) {
+            logger.error("Cannot load url: " + url + " Check if server is started.");
+            throw new URLNotLoadingException();
+        }
     }
 }

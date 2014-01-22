@@ -51,6 +51,14 @@ configure(subprojects) {
     }
 
     sourceSets {
+        main {
+            java {
+                srcDir 'src/main/java'
+            }
+            resources {
+                srcDirs = ['src/main/resources', 'src/main/webapp']
+            }
+        }
         test {
             java {
                 srcDir 'src/test/java'
@@ -206,7 +214,7 @@ project('spitter-specification') {
     dependencies {
         compile project(':spitter-service')
 
-        compile 'org.jbehave:jbehave-core:3.9'
+        compile 'org.jbehave:jbehave-core:4.0-beta-3'
 
         compile 'org.jbehave.web:jbehave-web-selenium:3.6-beta-1'
         compile 'org.jbehave.site:jbehave-site-resources:3.1.1'
@@ -216,6 +224,8 @@ project('spitter-specification') {
 
         compile 'org.seleniumhq.selenium:selenium-java:2.35.0'
         compile 'org.seleniumhq.selenium.fluent:fluent-selenium:1.14.2'
+
+        compile "org.springframework:spring-jdbc:$springVersion"
     }
 
     test {
