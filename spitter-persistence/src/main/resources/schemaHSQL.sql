@@ -15,7 +15,7 @@ create table spittle (
     --id INTEGER AUTO_INCREMENT, -- MySQL
     spitter_id integer NOT NULL,
     message varchar(2000) NOT NULL,
-    whencreated datetime NOT NULL,
+    whencreated TIMESTAMP NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (spitter_id) references spitter(id)
 );

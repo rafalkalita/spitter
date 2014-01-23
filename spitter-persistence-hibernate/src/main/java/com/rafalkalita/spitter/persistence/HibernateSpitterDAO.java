@@ -5,6 +5,7 @@ import com.rafalkalita.spitter.model.Spittle;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -45,9 +46,12 @@ public class HibernateSpitterDAO implements SpitterDAO {
     @SuppressWarnings("unchecked")
     public List<Spittle> getRecentSpittles(int count) {
 
-        List<Spittle> spittles = currentSession().createCriteria(Spittle.class).list();
-
-        return spittles.subList(0, count > spittles.size() ? spittles.size() : count);
+        return currentSession()
+                .createCriteria(Spittle.class)
+                .addOrder(Order.asc("whenCreated"))
+                .setFirstResult(0)
+                .setMaxResults(count)
+                .list();
     }
 
     @Override
