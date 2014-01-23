@@ -86,6 +86,7 @@ configure(subprojects) {
         testCompile "org.springframework:spring-test:$springVersion"
 
         testCompile 'mysql:mysql-connector-java:5.1.28'
+        testCompile 'joda-time:joda-time:2.3'
     }
 
     [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:all']

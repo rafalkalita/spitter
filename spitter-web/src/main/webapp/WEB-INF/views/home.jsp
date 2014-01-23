@@ -26,7 +26,7 @@
                     <span class="spittleListText">
                         <a href="${spitter_url}"><c:out value="${spittle.spitter.username}" /></a>
                         <c:out value="${spittle.message}" /><br/>
-                        <small><fmt:formatDate value="${spittle.whenCreated}" pattern="hh:mma MMM d, yyyy" /></small>
+                        <small class="date"><fmt:formatDate value="${spittle.whenCreated}" pattern="hh:mma MMM d, yyyy" /></small>
                     </span>
                 </li>
             </div>

@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -50,7 +49,7 @@ public class SpitterSteps {
     }
 
     @Given("$user is a user with an account")
-    @Alias("And $user is a user with an account") // used in parameterised scenarios
+    @Alias("And $user is a user with an account")
     public void userHasAnAccount(String user) {
         logger.info("creating a user: " + user);
         home.createAUser(user);
@@ -64,7 +63,7 @@ public class SpitterSteps {
     }
 
     @Given("user $user posted a spittle on '$date'")
-    public void userPostedASpittleOn(String user, Date date) {
+    public void userPostedASpittleOn(String user, String date) {
         home.postASpittle(user, "message", date);
     }
 

@@ -5,12 +5,17 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jbehave.web.selenium.FluentWebDriverPage;
 import org.jbehave.web.selenium.WebDriverProvider;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.openqa.selenium.By;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.annotation.Resource;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 import static org.springframework.test.jdbc.JdbcTestUtils.countRowsInTableWhere;
@@ -23,6 +28,8 @@ import static org.springframework.test.jdbc.JdbcTestUtils.countRowsInTableWhere;
 public class Home extends FluentWebDriverPage {
 
     private static final Log logger = LogFactory.getLog(Home.class);
+    private static final DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss");
+    private static final DateTimeFormatter fmt1 = DateTimeFormat.forPattern("hh:mmaa MMM dd, yyyy");
 
     @Resource(name = "spitterProperties")
     private Properties spitterProperties;
@@ -58,14 +65,17 @@ public class Home extends FluentWebDriverPage {
 
     public void postASpittle(String username, String message) {
 
-        postASpittle(username, message, new Date());
+        String date = new DateTime().toString("dd/MM/yyyy HH:mm:ss");
+
+        postASpittle(username, message, date);
     }
 
-    public void postASpittle(String username, String message, Date date) {
+    public void postASpittle(String username, String message, String date) {
 
+        Date parsedDate = fmt.parseDateTime(date).toDate();
         Long userId = getUserId(username);
         String sql = "INSERT INTO spittle(spitter_id, message, whencreated) VALUES(?, ?, ?)";
-        Object[] params = new Object[] { userId, message, date};
+        Object[] params = new Object[] { userId, message, parsedDate};
         int[] types = new int[] { Types.VARCHAR, Types.VARCHAR, Types.TIMESTAMP };
 
         int row = jdbcTemplate.update(sql, params, types);
@@ -82,7 +92,34 @@ public class Home extends FluentWebDriverPage {
     }
 
     public boolean allSpittlesAreOrderedDescending() {
-        return false; // TODO: finish
+
+
+        int numberOfElements = findElements(By.xpath("//small[@class='date']")).size();
+        List<DateTime> dateTimeList = new ArrayList<DateTime>(numberOfElements);
+
+        for(int i=0; i<numberOfElements;i++) {
+
+            String date = findElements(By.xpath("//small[@class='date']")).get(i).getText();
+
+            dateTimeList.add(fmt1.parseDateTime(date));
+        }
+
+        return isListOrdered(dateTimeList);
+    }
+
+    private boolean isListOrdered(List<DateTime> dateTimeList) {
+
+        DateTime firstElement = dateTimeList.get(0);
+
+        for(DateTime element : dateTimeList) {
+
+            if(element.compareTo(firstElement) < 0) {
+                logger.info("Dates are not in order: " + dateTimeList);
+                return false;
+            }
+            firstElement = element;
+        }
+        return true;
     }
 
     private boolean isUserRegistered(String username) {
