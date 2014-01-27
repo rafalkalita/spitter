@@ -17,9 +17,7 @@ import static org.apache.commons.lang.builder.ToStringBuilder.reflectionToString
  */
 @Entity
 @Table(name = "spittle")
-public class Spittle implements java.io.Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Spittle {
 
     private Long id;
     private Spitter spitter;

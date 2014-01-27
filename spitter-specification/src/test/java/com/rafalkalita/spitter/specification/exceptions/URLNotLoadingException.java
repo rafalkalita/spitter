@@ -6,6 +6,9 @@ package com.rafalkalita.spitter.specification.exceptions;
  * Time: 13:07
  */
 public class URLNotLoadingException extends RuntimeException {
+
+    private static final long serialVersionUID = 1L;
+
     public URLNotLoadingException() {
         super();
     }
