@@ -1,7 +1,7 @@
 package com.rafalkalita.spitter.persistence;
 
 import com.rafalkalita.spitter.model.Spitter;
-
+import com.rafalkalita.spitter.model.Spittle;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,10 +15,11 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 import static org.springframework.test.jdbc.JdbcTestUtils.countRowsInTable;
 import static org.springframework.test.jdbc.JdbcTestUtils.deleteFromTables;
 
@@ -47,11 +48,12 @@ public class SpitterDAOTest {
 
     @After
     public void cleanup() {
+        deleteFromTables(jdbcTemplate, "spittle");
         deleteFromTables(jdbcTemplate, "spitter");
     }
 
     @Test
-    public void shouldCreateRowsAndSetIds() {
+    public void createsRowsAndSetIds() {
 
         assertEquals(0, countRowsInTable(jdbcTemplate, "spitter"));
         insertASpitter("username", "password", "fullname");
@@ -63,7 +65,34 @@ public class SpitterDAOTest {
     }
 
     @Test
-    public void shouldBeAbleToFindInsertedSpitter() {
+    public void savesModifiedSpitter() {
+
+        String newPassword = "newPassword";
+
+        Spitter spitterIn = insertASpitter("username", "password", "fullname");
+
+        spitterIn.setPassword(newPassword);
+        dao.saveSpitter(spitterIn);
+
+        Spitter spitterOut = dao.getSpitterById(spitterIn.getId());
+        assertEquals(newPassword, spitterOut.getPassword());
+    }
+
+    @Test
+    public void addsSpittle() {
+
+        Spitter spitter = insertASpitter("username", "password", "fullname");
+
+        Spittle spittle = aSpittle(spitter, "message");
+
+        assertNull(spittle.getId());
+        dao.addSpittle(spittle);
+        assertNotNull(spittle.getId());
+
+    }
+
+    @Test
+    public void findsInsertedSpitter() {
 
         Spitter spitterIn = insertASpitter("username", "password", "fullname");
 
@@ -73,13 +102,33 @@ public class SpitterDAOTest {
     }
 
     @Test
-    public void shouldBeAbleToFindInsertedSpitterByName() {
+    public void findInsertedSpitterByName() {
 
         Spitter spitterIn = insertASpitter("username", "password", "fullname");
 
         Spitter spitterOut = dao.getSpitterByUsername(spitterIn.getUsername());
 
         assertEquals(spitterIn, spitterOut);
+    }
+
+    @Test
+    public void retrievesAListOfSpittles() {
+
+        Spitter spitter = insertASpitter("username", "password", "fullname");
+
+        Spittle spittle1 = aSpittle(spitter, "message1");
+        Spittle spittle2 = aSpittle(spitter, "message2");
+        Spittle spittle3 = aSpittle(spitter, "message3");
+
+        dao.addSpittle(spittle1);
+        dao.addSpittle(spittle2);
+        dao.addSpittle(spittle3);
+
+        List<Spittle> spittles = dao.getRecentSpittles(3);
+
+        List<Spittle> expectedSpittles = Arrays.asList(spittle1, spittle2, spittle3);
+
+        assertEquals(expectedSpittles, spittles);
     }
 
     private Spitter insertASpitter(String username, String password, String fullname) {
@@ -95,5 +144,15 @@ public class SpitterDAOTest {
         assertNotNull(spitter.getId());
 
         return spitter;
+    }
+
+    private Spittle aSpittle(Spitter spitter, String message) {
+
+        Spittle spittle = new Spittle();
+
+        spittle.setWhenCreated(new Date());
+        spittle.setMessage(message);
+        spittle.setSpitter(spitter);
+        return spittle;
     }
 }

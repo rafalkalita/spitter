@@ -37,7 +37,7 @@ public class SpitterServiceImpl implements SpitterService {
     public void saveSpittle(Spittle spittle) {
 
         spittle.setWhenCreated(new Date());
-        spitterDao.saveSpittle(spittle);
+        spitterDao.addSpittle(spittle);
     }
 
     @Override

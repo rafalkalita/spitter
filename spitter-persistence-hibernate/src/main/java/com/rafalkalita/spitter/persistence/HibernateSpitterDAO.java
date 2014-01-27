@@ -55,7 +55,7 @@ public class HibernateSpitterDAO implements SpitterDAO {
     }
 
     @Override
-    public void saveSpittle(Spittle spittle) {
+    public void addSpittle(Spittle spittle) {
         currentSession().save(spittle);
     }
 

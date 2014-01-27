@@ -20,7 +20,7 @@ public interface SpitterDAO {
 
     List<Spittle> getRecentSpittles(int count);
 
-    void saveSpittle(Spittle spittle);
+    void addSpittle(Spittle spittle);
 
     Spitter getSpitterByUsername(String username);
 }
