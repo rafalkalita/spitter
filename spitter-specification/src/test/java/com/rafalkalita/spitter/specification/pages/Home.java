@@ -84,7 +84,7 @@ public class Home extends FluentWebDriverPage {
     }
 
     public int numberOfSpittles() {
-        return divs(By.xpath("//div[@class='spittle']")).size();
+        return findElements(By.xpath("//div[@class='spittle']")).size();
     }
 
     public int numberOfSpittlesForAUser(String username) {
@@ -133,7 +133,7 @@ public class Home extends FluentWebDriverPage {
     }
 
     private void checkPageIsLoaded(String url) {
-        if(divs(By.xpath("//body[@id='spitter']")).size() == 0) {
+        if(findElements(By.xpath("//body[@id='spitter']")).size() == 0) {
             logger.error("Cannot load url: " + url + " Check if server is started.");
             throw new URLNotLoadingException();
         }
