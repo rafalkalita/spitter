@@ -1,0 +1,50 @@
+body {
+
+  font-size: 87.5%; /* Base font size is 14px; */
+  font-family: DroidSerifRegular, Arial;
+  line-height: 1.5;
+  text-align: left;
+}
+
+h1 {
+  font-size: 1.75em;
+  color: #BB3333;
+}
+h2 {
+  font-size: 1.5em;
+  color: #BB3333;
+}
+h3 {
+  font-size: 1.25em;
+}
+h4 {
+  font-size: 1.0em;
+}
+h5 {
+  font-size: 0.75em;
+}
+h6 {
+  font-size: 0.5em;
+}
+p{
+  font-family: inherit;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  text-rendering: optimizeLegibility;
+}
+a {
+  text-decoration: none;
+}
+a:link, a:visited {
+  color: #074e68;
+}
+a:hover, a:active {
+  color: #074e68;
+  text-decoration: underline;
+}
+
+#container {
+  margin: 10px;
+}

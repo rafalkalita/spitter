@@ -1,21 +1,16 @@
 package com.rafalkalita.spitter.service;
 
 import com.rafalkalita.spitter.model.Spitter;
-
 import com.rafalkalita.spitter.model.Spittle;
 import com.rafalkalita.spitter.persistence.SpitterDAO;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
