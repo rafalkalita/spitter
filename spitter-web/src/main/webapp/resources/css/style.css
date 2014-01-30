@@ -45,6 +45,30 @@ a:hover, a:active {
   text-decoration: underline;
 }
 
-#container {
-  margin: 10px;
+.mainContent {
+    line-height: 25px;
+}
+
+.content {
+    width: 76%;
+    float: left;
+}
+
+.sidebar {
+    width: 13%;
+    min-width: 180px;
+    float: left;
+    background-color: #EEE;
+
+    margin: 2% 0 2% 2%;
+    margin-top: 10px;
+    padding: 2% 2%;
+}
+
+#content {
+    padding: 10px;
+}
+
+#top {
+    padding: 10px;
 }

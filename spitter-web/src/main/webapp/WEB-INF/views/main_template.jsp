@@ -7,6 +7,7 @@
         <link href="<s:url value="/resources" />/css/reset.css" rel="stylesheet" type="text/css" />
         <link href="<s:url value="/resources" />/css/logobar.css" rel="stylesheet" type="text/css" />
         <link href="<s:url value="/resources" />/css/style.css" rel="stylesheet" type="text/css" />
+        <link href="<s:url value="/resources" />/css/login.css" rel="stylesheet" type="text/css" />
     </head>
     <body id="spitter">
 
@@ -14,15 +15,21 @@
             <div id="sitename">Spitter</div>
             <div id="logo"></div>
         </div>
-        <div id="container">
-
-            <div id="top">
-                <t:insertAttribute name="top" />
-            </div>
-
-            <div id="content">
-                <t:insertAttribute name="content" />
+        <div class="mainContent">
+            <div class="content">
+                <div id="top">
+                    <t:insertAttribute name="top" />
+                </div>
+                <div id="content">
+                    <t:insertAttribute name="content" />
+                </div>
             </div>
         </div>
+        <aside class="sidebar">
+            <article>
+                <t:insertAttribute name="side" />
+            </article>
+        </aside>
+
     </body>
 </html>
