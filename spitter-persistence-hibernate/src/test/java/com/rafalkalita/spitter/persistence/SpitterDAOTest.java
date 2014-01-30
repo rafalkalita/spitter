@@ -131,6 +131,28 @@ public class SpitterDAOTest {
         assertEquals(expectedSpittles, spittles);
     }
 
+    @Test
+    public void retrievesAListOfSpittlesForSpitter() {
+
+        Spitter spitter1 = insertASpitter("username1", "password1", "fullname1");
+        Spitter spitter2 = insertASpitter("username2", "password2", "fullname2");
+
+        Spittle spittle11 = aSpittle(spitter1, "username1 message1");
+        Spittle spittle12 = aSpittle(spitter1, "username1 message2");
+        Spittle spittle21 = aSpittle(spitter2, "username2 message1");
+        Spittle spittle22 = aSpittle(spitter2, "username2 message2");
+
+        dao.addSpittle(spittle11);
+        dao.addSpittle(spittle12);
+        dao.addSpittle(spittle21);
+        dao.addSpittle(spittle22);
+
+        List<Spittle> spittles = dao.getSpittlesForSpitter(spitter1.getUsername());
+        List<Spittle> expectedSpittles = Arrays.asList(spittle11, spittle12);
+
+        assertEquals(expectedSpittles, spittles);
+    }
+
     private Spitter insertASpitter(String username, String password, String fullname) {
 
         Spitter spitter = new Spitter();

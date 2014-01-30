@@ -55,4 +55,9 @@ public class SpitterServiceImpl implements SpitterService {
     public Spitter getSpitterByUsername(String username) {
         return spitterDao.getSpitterByUsername(username);
     }
+
+    @Override
+    public List<Spittle> getSpittlesForSpitter(String username) {
+        return spitterDao.getSpittlesForSpitter(username);
+    }
 }

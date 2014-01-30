@@ -13,13 +13,13 @@ Scenario: home page displays all spittles
 Given Jack is a user with an account
 And user Jack posted 6 spittles
 When I navigate to the home page
-Then I see 6 spittles on the home page
+Then I see 6 spittles
 
 Scenario: home page displays 10 spittles (defined in defaultSpittlesPerPage property)
 Given Jack is a user with an account
 And user Jack posted 15 spittles
 When I navigate to the home page
-Then I see 10 spittles on the home page
+Then I see 10 spittles
 
 Scenario: home page displays spittles from different users
 Given Jack is a user with an account
@@ -27,7 +27,7 @@ And Anna is a user with an account
 And user Jack posted 3 spittles
 And user Anna posted 5 spittles
 When I navigate to the home page
-Then I see 8 spittles on the home page
+Then I see 8 spittles
 And 3 of the spittles belong to user Jack
 And 5 of the spittles belong to user Anna
 
@@ -40,7 +40,17 @@ And user Anna posted a spittle on '21/12/2013 23:00:00'
 And user Anna posted a spittle on '01/12/2013 23:00:00'
 And user Anna posted a spittle on '15/12/2013 23:00:00'
 When I navigate to the home page
-Then I see 5 spittles on the home page
+Then I see 5 spittles
 And 2 of the spittles belong to user Jack
 And 3 of the spittles belong to user Anna
 And all spittles are ordered descending
+
+Scenario: spittles page displays spittles for a given user
+Given Jack is a user with an account
+And Anna is a user with an account
+And user Jack posted 3 spittles
+And user Anna posted 5 spittles
+When I navigate to the home page
+And click on username Jack
+Then I see 3 spittles
+And 3 of the spittles belong to user Jack

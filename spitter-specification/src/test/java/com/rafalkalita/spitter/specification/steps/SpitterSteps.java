@@ -72,7 +72,12 @@ public class SpitterSteps {
         home.go();
     }
 
-    @Then("I see $number spittles on the home page")
+    @When("click on username $username")
+    public void clickOnAUsername(String username) {
+        home.clickLinkWithUsername(username);
+    }
+
+    @Then("I see $number spittles")
     public void theNumberOfSpittlesOnTheHomePageIs(int number) {
         assertEquals(number, home.numberOfSpittles());
     }

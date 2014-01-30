@@ -73,4 +73,18 @@ public class HibernateSpitterDAO implements SpitterDAO {
         }
         return null;
     }
+
+    @Override
+    public List<Spittle> getSpittlesForSpitter(String username) {
+
+        Spitter spitter = this.getSpitterByUsername(username);
+        if (spitter == null) {
+            return null;
+        }
+        return currentSession()
+                .createCriteria(Spittle.class)
+                .addOrder(Order.asc("whenCreated"))
+                .add(Restrictions.eq("spitter", spitter))
+                .list();
+    }
 }

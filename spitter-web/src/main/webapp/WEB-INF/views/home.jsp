@@ -9,13 +9,13 @@
     <c:forEach var="spittle" items="${spittles}">
 
         <div class="spittle" name="${spittle.spitter.username}">
-            <s:url value="/spitters/{spitterName}" var="spitter_url" >
+            <s:url value="/spitters/{spitterName}/spittles" var="spitter_url" >
                 <s:param name="spitterName" value="${spittle.spitter.username}" />
             </s:url>
 
             <li>
                 <span class="spittleListText">
-                    <a href="${spitter_url}"><c:out value="${spittle.spitter.username}" /></a>
+                    <a class="spitterlink" href="${spitter_url}"><c:out value="${spittle.spitter.username}" /></a>
                     <c:out value="${spittle.message}" /><br/>
                     <small class="date"><fmt:formatDate value="${spittle.whenCreated}" pattern="hh:mma MMM d, yyyy" /></small>
                 </span>

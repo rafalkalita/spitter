@@ -23,4 +23,6 @@ public interface SpitterDAO {
     void addSpittle(Spittle spittle);
 
     Spitter getSpitterByUsername(String username);
+
+    List<Spittle> getSpittlesForSpitter(String username);
 }

@@ -107,6 +107,10 @@ public class Home extends FluentWebDriverPage {
         return isListOrdered(dateTimeList);
     }
 
+    public void clickLinkWithUsername(String username) {
+        findElements(By.xpath("//a[@class='spitterlink']")).get(0).click();
+    }
+
     private boolean isListOrdered(List<DateTime> dateTimeList) {
 
         DateTime firstElement = dateTimeList.get(0);
