@@ -12,8 +12,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * User: rafalkalita
@@ -42,12 +42,15 @@ public class HomeControllerTest {
     @Test
     public void returnsHomeView() {
 
+        // given
         date = new Date();
+        given(spitterService.getRecentSpittles(10)).willReturn(twoSpittles());
+        given(spitterProperties.getProperty("defaultSpittlesPerPage")).willReturn("10");
 
-        when(spitterService.getRecentSpittles(10)).thenReturn(twoSpittles());
-        when(spitterProperties.getProperty("defaultSpittlesPerPage")).thenReturn("10");
+        // when
         String outcome = instance.showHomeView(model);
 
+        // then
         verify(spitterService).getRecentSpittles(10);
 
         assertEquals(twoSpittles(), model.get("spittles"));
