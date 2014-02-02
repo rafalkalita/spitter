@@ -3,6 +3,7 @@ package com.rafalkalita.spitter.mvc.controller;
 import com.rafalkalita.spitter.model.Spitter;
 import com.rafalkalita.spitter.model.Spittle;
 import com.rafalkalita.spitter.service.SpitterService;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -13,7 +14,7 @@ import org.springframework.ui.ExtendedModelMap;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 /**
@@ -47,6 +48,16 @@ public class SpitterControllerTest {
         assertEquals("spittles/list", view);
         assertEquals(spitter, model.get("spitter"));
         assertEquals(spittles, model.get("spittleList"));
+    }
+
+    @Test
+    public void displaysCreateNewSpitterForm() {
+
+        String view = instance.showNewSpitterForm(model);
+
+        assertEquals("spitters/edit", view);
+        assertTrue(model.containsAttribute("spitter"));
+        assertNotNull((Spitter)model.get("spitter"));
     }
 
     private List<Spittle> listOfTwoSpittles() {

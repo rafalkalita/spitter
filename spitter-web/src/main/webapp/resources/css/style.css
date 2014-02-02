@@ -77,3 +77,8 @@ a:hover, a:active {
 .date {
     font-size: smaller;
 }
+
+.error {
+	color: red;
+	font-size: 8pt;
+}
