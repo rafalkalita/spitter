@@ -3,19 +3,20 @@ package com.rafalkalita.spitter.mvc.controller;
 import com.rafalkalita.spitter.model.Spitter;
 import com.rafalkalita.spitter.model.Spittle;
 import com.rafalkalita.spitter.service.SpitterService;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ExtendedModelMap;
+import org.springframework.validation.BindingResult;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
 
 /**
  * User: rafalkalita
@@ -26,7 +27,7 @@ import static org.mockito.Mockito.when;
 public class SpitterControllerTest {
 
     @InjectMocks
-    SpitterController instance = new SpitterController();
+    SpitterController instance;
 
     @Mock
     private SpitterService service;
@@ -37,14 +38,17 @@ public class SpitterControllerTest {
     @Test
     public void producesSpittlesForSpitter() {
 
+        // given
         Spitter spitter = aSpitter();
         List<Spittle> spittles = listOfTwoSpittles();
 
-        when(service.getSpitterByUsername(spitter.getUsername())).thenReturn(spitter);
-        when(service.getSpittlesForSpitter(spitter.getUsername())).thenReturn(spittles);
+        given(service.getSpitterByUsername(spitter.getUsername())).willReturn(spitter);
+        given(service.getSpittlesForSpitter(spitter.getUsername())).willReturn(spittles);
 
+        // when
         String view = instance.displaySpittlesForSpitter(spitter.getUsername(), model);
 
+        // then
         assertEquals("spittles/list", view);
         assertEquals(spitter, model.get("spitter"));
         assertEquals(spittles, model.get("spittleList"));
@@ -53,11 +57,47 @@ public class SpitterControllerTest {
     @Test
     public void displaysCreateNewSpitterForm() {
 
+        // given
+
+        // when
         String view = instance.showNewSpitterForm(model);
 
+        // then
         assertEquals("spitters/edit", view);
         assertTrue(model.containsAttribute("spitter"));
         assertNotNull((Spitter)model.get("spitter"));
+    }
+
+    @Test
+    public void processNewSpitterForm() {
+
+        // given
+        Spitter spitter = aSpitter();
+        BindingResult mockedBindingResult = mock(BindingResult.class);
+
+        // when
+        String view = instance.processNewSpitterForm(spitter, mockedBindingResult);
+
+        // then
+        verify(service).saveSpitter(spitter);
+        verifyZeroInteractions(service);
+
+        assertEquals("redirect:/spitters/" + spitter.getUsername() + "/spittles", view);
+    }
+
+    @Test
+    public void processNewSpitterFormWithErrors() {
+
+        // given
+        BindingResult mockedBindingResult = mock(BindingResult.class);
+        given(mockedBindingResult.hasErrors()).willReturn(true);
+
+        // when
+        String view = instance.processNewSpitterForm(aSpitter(), mockedBindingResult);
+
+        // then
+        verifyZeroInteractions(service);
+        assertEquals("spitters/edit", view);
     }
 
     private List<Spittle> listOfTwoSpittles() {

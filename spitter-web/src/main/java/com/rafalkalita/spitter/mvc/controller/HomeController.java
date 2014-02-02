@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+/**
+ * Displays a home page with recent spittles.
+ */
 @Controller
 public class HomeController {
 

@@ -15,6 +15,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
+ * Deals with requests altering spitter and listing spittles.
+ *
  * User: rafalkalita
  * Date: 30/01/2014
  * Time: 18:24
