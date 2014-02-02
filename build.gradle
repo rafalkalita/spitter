@@ -40,6 +40,7 @@ configure(subprojects) {
     project.ext {
 
         sourceCompatibility = JavaVersion.VERSION_1_7
+        targetCompatibility = JavaVersion.VERSION_1_7
 
         jacksonVersion = '1.9.13'
         jodaVersion = '2.3'
@@ -106,7 +107,6 @@ project('spitter-model') {
         compile "commons-lang:commons-lang:2.6"
         compile "javax.persistence:persistence-api:1.0"
         compile "javax.validation:validation-api:1.0.0.GA"
-        compile 'org.hibernate:hibernate-validator:5.0.2.Final'
         compile "org.codehaus.jackson:jackson-core-asl:1.6.3"
 
         compile "org.springframework:spring-context:$springVersion"
@@ -175,10 +175,11 @@ project('spitter-web') {
         providedCompile group: 'javax.servlet', name: 'servlet-api', version:'2.5'
         providedCompile group: 'taglibs', name: 'standard', version: '1.1.2'
 
-        providedCompile 'org.apache.tomcat:jsp-api:6.0.37'
-        providedCompile 'org.apache.tomcat:jasper:6.0.37'
+        //providedCompile 'org.apache.tomcat:jsp-api:6.0.37'
+        //providedCompile 'org.apache.tomcat:jasper:6.0.37'
 
         compile "org.springframework:spring-webmvc:$springVersion"
+        compile 'org.hibernate:hibernate-validator:5.0.2.Final'
 
         compile 'org.apache.tiles:tiles-core:2.2.2'
         compile 'org.apache.tiles:tiles-jsp:2.2.2'
@@ -193,6 +194,7 @@ project('spitter-web') {
 
     [tomcatRun, tomcatStop]*.stopPort = 8081
     [tomcatRun, tomcatStop]*.stopKey = 'stopKey'
+    //[tomcatRun, tomcatStop]*.gradleOpts = '-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005'
 
     task createPom << {
         pom {
