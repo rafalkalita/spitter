@@ -54,3 +54,11 @@ When I navigate to the home page
 And click on username Jack
 Then I see 3 spittles
 And 3 of the spittles belong to user Jack
+
+Scenario: can register a user
+When I navigate to the registration page
+And I put value Jack Black in field fullName
+And I put value Jack in field username
+And I put value mypassword in field password
+And I submit registration form
+Then I will be navigated to user page

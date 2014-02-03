@@ -75,6 +75,7 @@ public class HibernateSpitterDAO implements SpitterDAO {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Spittle> getSpittlesForSpitter(String username) {
 
         Spitter spitter = this.getSpitterByUsername(username);

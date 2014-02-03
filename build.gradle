@@ -110,6 +110,7 @@ project('spitter-model') {
         compile "org.codehaus.jackson:jackson-core-asl:1.6.3"
 
         compile "org.springframework:spring-context:$springVersion"
+        compile 'org.hibernate:hibernate-validator:5.0.2.Final'
     }
 }
 
@@ -179,7 +180,6 @@ project('spitter-web') {
         //providedCompile 'org.apache.tomcat:jasper:6.0.37'
 
         compile "org.springframework:spring-webmvc:$springVersion"
-        compile 'org.hibernate:hibernate-validator:5.0.2.Final'
 
         compile 'org.apache.tiles:tiles-core:2.2.2'
         compile 'org.apache.tiles:tiles-jsp:2.2.2'

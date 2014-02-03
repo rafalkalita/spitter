@@ -23,4 +23,16 @@ public class PageFactory {
     public Home newHome() {
         return new Home(webDriverProvider, jdbcTemplate);
     }
+
+    public UserPage newUserPage() {
+        return new UserPage(webDriverProvider);
+    }
+
+    public Registration newRegistrationPage() {
+        return new Registration(webDriverProvider);
+    }
+
+    public Forms newForms() {
+        return new Forms(webDriverProvider);
+    }
 }

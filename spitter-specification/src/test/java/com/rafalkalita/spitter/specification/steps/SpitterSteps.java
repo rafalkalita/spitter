@@ -1,7 +1,6 @@
 package com.rafalkalita.spitter.specification.steps;
 
-import com.rafalkalita.spitter.specification.pages.Home;
-import com.rafalkalita.spitter.specification.pages.PageFactory;
+import com.rafalkalita.spitter.specification.pages.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jbehave.core.annotations.*;
@@ -26,6 +25,9 @@ public class SpitterSteps {
     private static final Log logger = LogFactory.getLog(SpitterSteps.class);
 
     private Home home;
+    private Registration registration;
+    private Forms forms;
+    private UserPage userPage;
 
     @Inject
     JdbcTemplate jdbcTemplate;
@@ -40,12 +42,20 @@ public class SpitterSteps {
         } catch (Exception e){
             logger.error(e.getMessage());
         }
+    }
 
+    @AfterScenario
+    public void cleanUp() {
+        deleteFromTables(jdbcTemplate, "spittle");
+        deleteFromTables(jdbcTemplate, "spitter");
     }
 
     @Inject
     public SpitterSteps(PageFactory pageFactory) {
         this.home = pageFactory.newHome();
+        this.registration = pageFactory.newRegistrationPage();
+        this.forms = pageFactory.newForms();
+        this.userPage = pageFactory.newUserPage();
     }
 
     @Given("$user is a user with an account")
@@ -90,5 +100,25 @@ public class SpitterSteps {
     @Then("all spittles are ordered descending")
     public void allSpittlesAreOrderedDescending() {
         assertTrue(home.allSpittlesAreOrderedDescending());
+    }
+
+    @When("I navigate to the registration page")
+    public void navigateToRegistrationPage() {
+        registration.go();
+    }
+
+    @When("I put value $value in field $fieldId")
+    public void formFieldContainsValue(String value, String fieldId) {
+        forms.fillTextField(value, fieldId);
+    }
+
+    @When("I submit $formId form")
+    public void submitTheForm(String formId) {
+        forms.submitForm(formId);
+    }
+
+    @Then("I will be navigated to user page")
+    public void navigatedToUserPage() {
+        userPage.checkIfNavigatedTo();
     }
 }
