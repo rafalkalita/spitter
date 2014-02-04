@@ -46,7 +46,6 @@ configure(subprojects) {
         jodaVersion = '2.3'
         junitVersion = '4.10'
         mockitoVersion = '1.9.5'
-        servletVersion = '2.5'
         springVersion = '3.2.6.RELEASE'
         hibernateVersion = '3.6.10.Final'
     }
@@ -173,13 +172,17 @@ project('spitter-web') {
         }
 
         //Compile time but not included dependencies
-        providedCompile group: 'javax.servlet', name: 'servlet-api', version:'2.5'
+        providedCompile group: 'org.jboss.spec.javax.servlet', name:'jboss-servlet-api_3.1_spec', version:'1.0.0.Final'
         providedCompile group: 'taglibs', name: 'standard', version: '1.1.2'
 
         //providedCompile 'org.apache.tomcat:jsp-api:6.0.37'
         //providedCompile 'org.apache.tomcat:jasper:6.0.37'
 
         compile "org.springframework:spring-webmvc:$springVersion"
+
+        compile 'org.springframework.security:spring-security-core:3.2.0.RELEASE'
+        compile "org.springframework.security:spring-security-web:3.2.0.RELEASE"
+        compile "org.springframework.security:spring-security-config:3.2.0.RELEASE"
 
         compile 'org.apache.tiles:tiles-core:2.2.2'
         compile 'org.apache.tiles:tiles-jsp:2.2.2'
