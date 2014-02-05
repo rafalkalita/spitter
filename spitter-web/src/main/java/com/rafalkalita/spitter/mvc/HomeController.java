@@ -1,4 +1,4 @@
-package com.rafalkalita.spitter.mvc.controller;
+package com.rafalkalita.spitter.mvc;
 
 import com.rafalkalita.spitter.model.Spittle;
 import com.rafalkalita.spitter.service.SpitterService;

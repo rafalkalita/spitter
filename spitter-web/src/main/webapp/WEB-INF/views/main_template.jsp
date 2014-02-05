@@ -17,6 +17,9 @@
         </div>
         <div class="mainContent">
             <div class="content">
+                <div id="message">
+                    <t:insertAttribute name="message" />
+                </div>
                 <div id="top">
                     <t:insertAttribute name="top" />
                 </div>

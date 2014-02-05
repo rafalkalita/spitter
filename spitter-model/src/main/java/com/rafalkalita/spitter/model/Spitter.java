@@ -9,9 +9,9 @@ import static org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode
 import static org.apache.commons.lang.builder.ToStringBuilder.reflectionToString;
 
 /**
- * User: rafalkalita
- * Date: 20/11/2013
- * Time: 18:34
+ * TODO: Use org.springframework.security.crypto.password.PasswordEncoder for password.
+ *
+ * @author Rafal Kalita
  */
 @Entity
 @Table(name = "spitter")
@@ -28,6 +28,15 @@ public class Spitter {
 
     @Size(min=3, max=50, message="Your full name must be between 3 and 50 characters long.")
     private String fullName;
+
+    public Spitter() {}
+
+    public Spitter(Spitter spitter) {
+        this.id = spitter.getId();
+        this.username = spitter.getUsername();
+        this.password = spitter.getPassword();
+        this.fullName = spitter.getFullName();
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

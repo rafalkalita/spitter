@@ -1,4 +1,4 @@
-package com.rafalkalita.spitter.mvc.controller;
+package com.rafalkalita.spitter.mvc;
 
 import com.rafalkalita.spitter.model.Spitter;
 import com.rafalkalita.spitter.model.Spittle;
@@ -8,9 +8,12 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.validation.BindingResult;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +35,8 @@ public class SpitterControllerTest {
     @Mock
     private SpitterService service;
 
+    @Mock
+    AuthenticationManager authenticationManager;
 
     private ExtendedModelMap model = new ExtendedModelMap();
 
@@ -74,13 +79,15 @@ public class SpitterControllerTest {
         // given
         Spitter spitter = aSpitter();
         BindingResult mockedBindingResult = mock(BindingResult.class);
+        HttpServletRequest mockedServletRequest = mock(HttpServletRequest.class);
 
         // when
-        String view = instance.processNewSpitterForm(spitter, mockedBindingResult);
+        String view = instance.processNewSpitterForm(spitter, mockedBindingResult, mockedServletRequest);
 
         // then
         verify(service).saveSpitter(spitter);
         verifyZeroInteractions(service);
+        verify(authenticationManager).authenticate(isA(UsernamePasswordAuthenticationToken.class));
 
         assertEquals("redirect:/spitters/" + spitter.getUsername() + "/spittles", view);
     }
@@ -91,9 +98,10 @@ public class SpitterControllerTest {
         // given
         BindingResult mockedBindingResult = mock(BindingResult.class);
         given(mockedBindingResult.hasErrors()).willReturn(true);
+        HttpServletRequest mockedServletRequest = mock(HttpServletRequest.class);
 
         // when
-        String view = instance.processNewSpitterForm(aSpitter(), mockedBindingResult);
+        String view = instance.processNewSpitterForm(aSpitter(), mockedBindingResult, mockedServletRequest);
 
         // then
         verifyZeroInteractions(service);

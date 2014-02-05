@@ -10,6 +10,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath:service-context.xml
+            /WEB-INF/spitter-security.xml
             /WEB-INF/spitter-context.xml
         </param-value>
     </context-param>
@@ -19,7 +20,7 @@
     </listener>
 
     <servlet>
-        <servlet-name>SpringDispatcher</servlet-name>
+        <servlet-name>spitter</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextClass</param-name>
@@ -29,16 +30,28 @@
         </init-param>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>com.rafalkalita.spitter.mvc.config</param-value>
+            <param-value>com.rafalkalita.spitter.config</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>SpringDispatcher</servlet-name>
+        <servlet-name>spitter</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <session-config>
         <session-timeout>15</session-timeout>
     </session-config>
+
+    <!-- Spring Security -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 </web-app>

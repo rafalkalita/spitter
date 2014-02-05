@@ -66,6 +66,10 @@ a:hover, a:active {
     border: 1px solid #666;
 }
 
+#message {
+    padding:10px;
+}
+
 #content {
     padding: 10px;
 }
