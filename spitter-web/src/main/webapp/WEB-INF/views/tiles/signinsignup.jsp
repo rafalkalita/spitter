@@ -19,6 +19,7 @@
                 <input id="remember_me" type="checkbox" value="1" name="_spring_security_remember_me"/>
                 <label for="remember_me">Remember me</label>
                 <br /><input id="submit" type="submit" value="Sign In!" name="commit"/>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </fieldset>
         </form>
         <div class="notify">

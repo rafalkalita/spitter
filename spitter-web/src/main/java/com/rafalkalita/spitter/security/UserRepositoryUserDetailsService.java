@@ -17,7 +17,7 @@ import java.util.Collection;
 /**
  * @author Rafal Kalita
  */
-@Service("userService")
+@Service("userDetailsService")
 public class UserRepositoryUserDetailsService implements UserDetailsService {
 
     private static final Log logger = LogFactory.getLog(UserRepositoryUserDetailsService.class);
