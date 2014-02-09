@@ -3,6 +3,8 @@ package com.rafalkalita.spitter.mvc;
 import com.rafalkalita.spitter.model.Spitter;
 import com.rafalkalita.spitter.model.Spittle;
 import com.rafalkalita.spitter.service.SpitterService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -31,6 +33,8 @@ import java.util.List;
 @RequestMapping("/spitters")
 public class SpitterController {
 
+    private static final Log logger = LogFactory.getLog(LoginController.class);
+
     @Inject
     private SpitterService spitterService;
 
@@ -39,6 +43,8 @@ public class SpitterController {
 
     @RequestMapping(value = {"/{username}", "/{username}/spittles"}, method = RequestMethod.GET)
     public String displaySpittlesForSpitter(@PathVariable String username, Model model) {
+
+        logger.info("SpitterController [/spitters/{username} /spitters/{username}/spittles]");
 
         Spitter spitter = spitterService.getSpitterByUsername(username);
         List<Spittle> spittles = spitterService.getSpittlesForSpitter(username);
@@ -52,12 +58,16 @@ public class SpitterController {
     @RequestMapping(method = RequestMethod.GET, params = "new")
     public String showNewSpitterForm(Model model) {
 
+        logger.info("SpitterController [/spitters?new]");
+
         model.addAttribute(new Spitter());
         return "spitters/edit";
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String processNewSpitterForm(@Valid Spitter spitter, BindingResult bindingResult, HttpServletRequest request) {
+
+        logger.info("SpitterController [/spitters]");
 
         if(bindingResult.hasErrors()) {
             return "spitters/edit";

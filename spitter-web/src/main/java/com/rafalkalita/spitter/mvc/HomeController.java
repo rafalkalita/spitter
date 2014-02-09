@@ -2,6 +2,8 @@ package com.rafalkalita.spitter.mvc;
 
 import com.rafalkalita.spitter.model.Spittle;
 import com.rafalkalita.spitter.service.SpitterService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +20,8 @@ import java.util.Properties;
 @Controller
 public class HomeController {
 
+    private static final Log logger = LogFactory.getLog(LoginController.class);
+
     @Inject
     private SpitterService spitterService;
 
@@ -28,6 +32,8 @@ public class HomeController {
 
 	@RequestMapping(value={"/", "/home"}, method = RequestMethod.GET)
 	public String showHomeView(Map<String, Object> model) {
+
+        logger.info("HomeController [/, /home]");
 
         model.put("spittles", recentSpittles());
 
