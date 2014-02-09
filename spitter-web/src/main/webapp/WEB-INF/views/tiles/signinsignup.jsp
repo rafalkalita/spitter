@@ -32,7 +32,9 @@
     <sec:authorize access="isAuthenticated()">
         <span>User: <sec:authentication property="principal.username" /></span>
         <br/>
-        <s:url value="/logout" var="logout_url" />
-    	<a href="${logout_url}">Logout</a>
+        <form id="logoutForm" name='logoutForm' action="<s:url value='/logout' />" method='POST'>
+    	    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    	    <input id="submit" type="submit" value="Logout" name="commit"/>
+    	</form>
     </sec:authorize>
 </div>
