@@ -17,7 +17,7 @@
         <selenium-api>2.37.1</selenium-api>
         <spring-test>3.2.6.RELEASE</spring-test>
         <spring-jdbc>3.2.6.RELEASE</spring-jdbc>
-        <mysql-connector>5.1.28</mysql-connector>
+        <mysql-connector>8.0.28</mysql-connector>
         <ignore.failures>true</ignore.failures>
         <meta.filter></meta.filter>
         <threads>1</threads>
