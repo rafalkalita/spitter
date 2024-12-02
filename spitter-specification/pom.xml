@@ -16,7 +16,7 @@
         <selenium.version>2.37.1</selenium.version>
         <selenium-api>2.37.1</selenium-api>
         <spring-test>3.2.6.RELEASE</spring-test>
-        <spring-jdbc>3.2.6.RELEASE</spring-jdbc>
+        <spring-jdbc>6.1.14</spring-jdbc>
         <mysql-connector>5.1.28</mysql-connector>
         <ignore.failures>true</ignore.failures>
         <meta.filter></meta.filter>
